@@ -1,0 +1,966 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Orgo 1 Final Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: lab-notebook study tool. Sticky tab bar; one view at a time (sheet, cards, exam). */
+:root{
+  --bg:#F2F4F7; --paper:#FFFFFF; --ink:#18202E; --muted:#5A6577; --line:#D9DEE6;
+  --accent:#2952C8; --accent-soft:#E4EBFB;
+  --syn:#0E7A5F; --syn-soft:#DDF3EC; --anti:#B4441C; --anti-soft:#FBE7DE;
+  --mk:#6B3FB8; --mk-soft:#EEE6FB;
+  --good:#1D7A3A; --good-soft:#E1F3E6; --bad:#B42318; --bad-soft:#FCE6E4;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10141C; --paper:#181E29; --ink:#E7EBF2; --muted:#9AA4B5; --line:#2A3242;
+  --accent:#8AA8FF; --accent-soft:#1F2A47;
+  --syn:#5ED3AE; --syn-soft:#123329; --anti:#F59A73; --anti-soft:#3A2016;
+  --mk:#C3A3FF; --mk-soft:#2A1F42;
+  --good:#6BD38A; --good-soft:#15301E; --bad:#FF8A80; --bad-soft:#3A1715; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10141C; --paper:#181E29; --ink:#E7EBF2; --muted:#9AA4B5; --line:#2A3242;
+  --accent:#8AA8FF; --accent-soft:#1F2A47;
+  --syn:#5ED3AE; --syn-soft:#123329; --anti:#F59A73; --anti-soft:#3A2016;
+  --mk:#C3A3FF; --mk-soft:#2A1F42;
+  --good:#6BD38A; --good-soft:#15301E; --bad:#FF8A80; --bad-soft:#3A1715; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.05;margin:6px 0 8px;text-wrap:balance}
+.scope{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.scope span{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{font-family:var(--display);font-weight:500;font-size:16px;color:var(--muted);text-decoration:none;padding:14px 14px 12px;border-bottom:3px solid transparent;white-space:nowrap}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:24px 60px}
+h2{font-family:var(--display);font-weight:700;font-size:24px;margin:28px 0 6px;text-wrap:balance}
+h2:first-child{margin-top:0}
+.lede{color:var(--muted);max-width:65ch;margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;font-size:14px;color:var(--muted);align-items:center}
+.chip{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.c-syn{background:var(--syn-soft);color:var(--syn)} .c-anti{background:var(--anti-soft);color:var(--anti)}
+.c-mk{background:var(--mk-soft);color:var(--mk)} .c-amk{background:var(--accent-soft);color:var(--accent)}
+.c-none{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.sec{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+td.rg{font-family:var(--mono);font-size:13px}
+td .chips{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.note h3{font-family:var(--display);font-size:16px;margin:0 0 6px}
+.note p,.note ul{margin:0;font-size:14.5px}
+.note ul{padding-left:18px}
+.mono{font-family:var(--mono);font-size:.92em}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px}
+select,button{font-family:var(--body);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+button{cursor:pointer;font-weight:600}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+button:disabled{opacity:.45;cursor:default}
+.card-stage{perspective:1400px}
+.fcard{position:relative;width:100%;min-height:260px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s ease;border:0;padding:0;background:none;text-align:left;font-weight:400}
+.fcard.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.face.back{transform:rotateY(180deg);background:var(--accent-soft);border-color:var(--accent)}
+.face .tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.face .q{font-family:var(--display);font-size:clamp(19px,3vw,24px);font-weight:500;line-height:1.3}
+.face .a{font-size:17px}
+.face .hint{margin-top:auto;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.fcard{transition:none}}
+.counter{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.score{position:sticky;top:calc(env(safe-area-inset-top,0px) + 52px);z-index:4;background:var(--bg);padding-block:8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:13.5px;font-variant-numeric:tabular-nums}
+.bar{flex:1;min-width:120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0}
+.q-list{display:flex;flex-direction:column;gap:14px}
+.qcard{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px}
+.qhead{display:flex;gap:10px;align-items:baseline;margin-bottom:6px}
+.qnum{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:14px;font-variant-numeric:tabular-nums}
+.qsec{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.qtext{font-size:16.5px;margin:0 0 10px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;font-weight:400;padding:9px 12px;border-radius:8px;width:100%}
+.opt b{font-family:var(--mono);font-weight:500;min-width:1.4em}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--ink);opacity:1}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--ink);opacity:1}
+.expl{margin-top:10px;font-size:15px;padding:10px 12px;border-left:3px solid var(--accent);border-radius:0;background:var(--bg)}
+.expl strong{font-family:var(--display)}
+footer{color:var(--muted);font-size:13px;padding-block:10px 30px}
+@media (max-width:520px){.face{padding:18px}.qcard{padding:14px}}
+
+.chapnav{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.navrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.navlbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:4.6em}
+a.cl{font-family:var(--mono);font-size:12.5px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;white-space:nowrap}
+a.cl:hover{border-color:var(--accent);color:var(--accent)}
+a.cl.on{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+a.cl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.totals{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:4px}
+.chap{padding-block:6px 26px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.chap:last-child{border-bottom:0}
+.chap-head{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:flex-end;justify-content:space-between;margin-bottom:10px}
+.chap-head h2{margin:4px 0 0}
+.chap-links{display:flex;gap:14px;flex-wrap:wrap}
+.chap-links a{font-family:var(--display);font-weight:500;color:var(--accent);text-decoration:none;font-size:15px}
+.chap-links a:hover{text-decoration:underline}
+h3.tt{font-family:var(--display);font-size:17px;margin:18px 0 8px}
+@media (max-width:520px){.navlbl{min-width:100%}}
+</style>
+
+<header class="wrap top">
+  <div class="eyebrow">Organic Chemistry I · Cumulative final · Dec 9, 2026</div>
+  <h1>Orgo 1 Final Review</h1>
+  <div class="totals" id="totals"></div>
+  <nav class="chapnav" id="chapnav" aria-label="Chapters"></nav>
+</header>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap">
+  <a href="#sheet" data-view="sheet">Study sheet</a>
+  <a href="#cards" data-view="cards">Flashcards</a>
+  <a href="#exam" data-view="exam">Practice exam</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="v-sheet" data-v="sheet">
+  <p class="lede" id="sheet-all-note">Every chapter from 1 to 13 is below, grouped the way your four exams were. Tap a chapter chip above to see only that chapter. Each chapter links to its own flashcards and practice questions.</p>
+  <div id="sheet-body"></div>
+</section>
+
+<section id="v-cards" data-v="cards" hidden>
+  <h2>Flashcards</h2>
+  <p class="lede">Read the front, answer out loud, then tap the card or press Space to flip it. Use the arrow keys to move between cards.</p>
+  <div class="controls">
+    <label for="card-filter" class="eyebrow">Chapter</label>
+    <select id="card-filter"></select>
+    <button id="card-shuffle" type="button">Shuffle</button>
+    <span class="counter" id="card-count"></span>
+  </div>
+  <div class="card-stage">
+    <button class="fcard" id="fcard" type="button" aria-live="polite">
+      <div class="face front"><div class="tag" id="f-tag"></div><div class="q" id="f-q"></div><div class="hint">Tap to flip</div></div>
+      <div class="face back"><div class="tag" id="b-tag"></div><div class="a" id="b-a"></div></div>
+    </button>
+  </div>
+  <div class="controls" style="margin-top:14px">
+    <button id="card-prev" type="button">← Previous</button>
+    <button id="card-next" type="button" class="primary">Next →</button>
+  </div>
+</section>
+
+<section id="v-exam" data-v="exam" hidden>
+  <h2>Practice exam</h2>
+  <p class="lede">ACS-style questions with four choices and one best answer. Pick an answer to see whether it's right and why. Choose a chapter to drill it, or pick "Mock final" for 50 random questions from the whole book.</p>
+  <div class="controls">
+    <label for="exam-filter" class="eyebrow">Chapter</label>
+    <select id="exam-filter"></select>
+    <button id="exam-reset" type="button">Start over</button>
+  </div>
+  <div class="score" aria-live="polite"><span id="exam-score">0 / 0 correct</span><span id="exam-done">0 answered</span><div class="bar"><i id="exam-bar"></i></div></div>
+  <div class="q-list" id="q-list"></div>
+</section>
+
+</main>
+<footer class="wrap">Based on your Chapter 1–13 lecture slides (McMurry). The Exam 3 and Exam 4 sheets, flashcards and questions are included unchanged, with the same answer letters. Your answers are saved in this browser.</footer>
+
+<script>
+const E3_SHEET=[
+ {title:"7.11 and Chapter 8: alkene reactions",rows:[
+  ["7.11","Alkene + HX (with rearrangement)","HCl, HBr, HI","mk","none","Watch for a 1,2-H or 1,2-CH₃ shift that turns a 2° cation into a 3° one."],
+  ["8.1","Dehydrohalogenation (preview)","KOH, CH₃CH₂OH","none","none","Alkyl halide → alkene (elimination)."],
+  ["8.1","Dehydration (preview)","H₂SO₄ or H₃PO₄, heat","none","none","Alcohol → alkene."],
+  ["8.2","Halogenation","Br₂ or Cl₂, CH₂Cl₂","none","anti","Goes through a cyclic bromonium ion. Gives a trans-1,2-dihalide."],
+  ["8.3","Halohydrin","Br₂, H₂O (or NBS, DMSO/H₂O)","mk","anti","OH goes on the more substituted C, Br on the less substituted C."],
+  ["8.4","Oxymercuration","1) Hg(OAc)₂, H₂O/THF  2) NaBH₄","mk","none","Markovnikov alcohol. Mercurinium ion, so no rearrangement."],
+  ["8.5","Hydroboration–oxidation","1) BH₃·THF  2) H₂O₂, NaOH","amk","syn","OH on the less substituted C. H and OH added cis. No carbocation."],
+  ["8.6","Hydrogenation","H₂, Pd/C (or PtO₂)","none","syn","Both H on the same face. Ketones and aromatic rings survive."],
+  ["8.7","Epoxidation","RCO₃H (mCPBA)","none","syn","Alkene geometry is kept in the epoxide."],
+  ["8.7","Epoxide hydrolysis","H₃O⁺","none","anti","Epoxide → trans-1,2-diol."],
+  ["8.7","Dihydroxylation","1) OsO₄  2) NaHSO₃, H₂O","none","syn","cis-1,2-diol."],
+  ["8.8","Ozonolysis","1) O₃  2) Zn, CH₃CO₂H (or (CH₃)₂S)","none","none","C=C → two C=O. A carbon with H becomes an aldehyde, and =CH₂ becomes formaldehyde."],
+  ["8.8","Permanganate cleavage","KMnO₄, H₃O⁺","none","none","A carbon with H becomes –COOH, a carbon with two R groups becomes a ketone, and =CH₂ becomes CO₂."],
+  ["8.8","Diol cleavage","HIO₄, H₂O/THF","none","none","1,2-diol → two carbonyls (same products as ozonolysis)."],
+  ["8.9","Dichlorocarbene","CHCl₃, KOH","none","syn","Gives a 1,1-dichlorocyclopropane. Alkene geometry is kept."],
+  ["8.9","Simmons–Smith","CH₂I₂, Zn(Cu)","none","syn","Gives a cyclopropane (ICH₂ZnI carbenoid)."],
+  ["8.10","Radical polymerization","Initiator (e.g. benzoyl peroxide), heat","none","none","Steps: initiation, propagation, termination."]
+ ]},
+ {title:"Chapter 9: alkynes",rows:[
+  ["9.2","Alkyne from a dihalide","Vicinal dihalide + 2 KOH (or 2 NaNH₂)","none","none","Two E2 eliminations, going through a vinyl halide."],
+  ["9.3","HX addition","1 equiv HX → vinyl halide; 2 equiv → geminal dihalide","mk","none","Goes through a vinylic carbocation."],
+  ["9.3","X₂ addition","1 equiv X₂ → (E)-dihaloalkene; 2 equiv → tetrahalide","none","anti","The first addition is trans."],
+  ["9.4","Hg²⁺ hydration","H₂SO₄, H₂O, HgSO₄","mk","none","Enol → ketone. A terminal alkyne gives a methyl ketone."],
+  ["9.4","Hydroboration","1) BH₃ (or Sia₂BH)  2) H₂O₂, NaOH","amk","none","A terminal alkyne gives an aldehyde."],
+  ["9.5","Full reduction","H₂ (2 equiv), Pd/C","none","none","Alkyne → alkane."],
+  ["9.5","Lindlar reduction","H₂, Lindlar catalyst","none","syn","Gives a cis alkene."],
+  ["9.5","Dissolving-metal reduction","Li or Na, NH₃(l)","none","anti","Gives a trans alkene (radical-anion mechanism)."],
+  ["9.6","Oxidative cleavage","KMnO₄ or O₃","none","none","Internal → 2 RCOOH. Terminal → RCOOH + CO₂."],
+  ["9.7","Deprotonation","NaNH₂","none","none","Terminal alkyne → acetylide anion (pKa 25)."],
+  ["9.8","Alkylation","1) NaNH₂  2) CH₃X or 1° RX","none","none","Forms a new C–C bond. 2° and 3° halides give elimination instead."]
+ ]},
+ {title:"Chapter 10.1–10.5: alkyl halides",rows:[
+  ["10.3","Radical halogenation","Cl₂ or Br₂, hν (or heat)","none","none","C–H → C–X. Gives mixtures, favoring 3° > 2° > 1° H."],
+  ["10.4","Allylic bromination","NBS, hν, CCl₄","none","none","Replaces an allylic H with Br. The resonance-delocalized radical can give two products."],
+  ["10.3","From alkenes (review)","HX or X₂","mk","anti","HX is Markovnikov. X₂ is anti."]
+ ]}
+];;
+const E3_CARDS=[
+ ["7.11","When does a carbocation rearrange?","When a 1,2-hydride or 1,2-alkyl shift turns it into a more stable cation, usually 2° → 3°. The shifting group moves with its electron pair."],
+ ["7.11","3,3-dimethyl-1-butene + HCl: major product?","2-chloro-2,3-dimethylbutane, formed after a 1,2-methyl shift. C3 has no H, so a CH₃ moves instead."],
+ ["7.11","Which addition methods avoid rearrangement?","Oxymercuration, hydroboration, and X₂ addition. None of them forms a free carbocation."],
+ ["8","Br₂ + cyclopentene: product and stereochemistry?","trans-1,2-dibromocyclopentane (racemic). Anti addition through a bromonium ion."],
+ ["8","Intermediate in Br₂ addition?","A cyclic bromonium ion. Br⁻ attacks from the back face, which is why addition is anti."],
+ ["8","Br₂/H₂O on an unsymmetrical alkene: where does OH go?","On the more substituted carbon, which carries more δ+ in the bromonium ion. Br and OH end up anti."],
+ ["8","Hg(OAc)₂, H₂O; then NaBH₄","Markovnikov alcohol with no rearrangement (mercurinium ion intermediate)."],
+ ["8","BH₃·THF; then H₂O₂, NaOH","Anti-Markovnikov alcohol with syn addition of H and OH. No carbocation."],
+ ["8","1-methylcyclohexene → hydroboration–oxidation","trans-2-methylcyclohexanol. The H on C1 is cis to the OH, so CH₃ is trans to OH."],
+ ["8","H₂, Pd/C on an alkene","Alkane with syn addition. 1,2-dimethylcyclohexene gives cis-1,2-dimethylcyclohexane."],
+ ["8","mCPBA (RCO₃H) on an alkene","Epoxide with geometry kept (cis alkene → cis epoxide)."],
+ ["8","Alkene → trans-1,2-diol","1) mCPBA  2) H₃O⁺. The epoxide opens anti."],
+ ["8","Alkene → cis-1,2-diol","1) OsO₄  2) NaHSO₃, H₂O. Syn dihydroxylation."],
+ ["8","O₃; then Zn/CH₃CO₂H on an alkene","Breaks the C=C into two C=O. A carbon with H gives an aldehyde, and =CH₂ gives formaldehyde."],
+ ["8","KMnO₄, H₃O⁺ on an alkene","Cleavage. A carbon with H gives a carboxylic acid, a disubstituted carbon gives a ketone, and =CH₂ gives CO₂."],
+ ["8","HIO₄ on a 1,2-diol","Cleaves the C–C bond between the OH carbons, giving two carbonyls."],
+ ["8","CHCl₃ + KOH, then an alkene","Dichlorocarbene (:CCl₂) gives a 1,1-dichlorocyclopropane. Geometry is kept."],
+ ["8","CH₂I₂, Zn(Cu)","Simmons–Smith reaction. Adds CH₂ across the C=C to make a cyclopropane."],
+ ["8","Three steps of radical polymerization?","Initiation (homolysis makes radicals), propagation (a radical adds to the alkene, over and over), termination (two radicals combine)."],
+ ["8","Monomer for PVC? For Teflon?","PVC: vinyl chloride, CH₂=CHCl. Teflon: tetrafluoroethylene, CF₂=CF₂."],
+ ["8","cis-2-butene + Br₂ gives…","Racemic 2,3-dibromobutane. trans-2-butene gives meso."],
+ ["9","Hybridization and geometry of an alkyne carbon?","sp, linear (180°). One σ and two π bonds. Shorter and stronger than C=C."],
+ ["9","Naming rule when ene and yne tie?","Give the lowest number to the first multiple bond. On a tie, the double bond gets the lower number (e.g. pent-1-en-4-yne)."],
+ ["9","Vicinal dihalide + 2 KOH (or NaNH₂)","Alkyne via two eliminations (through a vinyl halide)."],
+ ["9","1-hexyne + 2 HBr","2,2-dibromohexane (geminal, Markovnikov twice)."],
+ ["9","2-butyne + 1 equiv Br₂","(E)-2,3-dibromo-2-butene. Anti addition."],
+ ["9","Terminal alkyne + H₂SO₄, H₂O, HgSO₄","Methyl ketone (Markovnikov enol, then tautomerization)."],
+ ["9","Terminal alkyne + BH₃; H₂O₂, NaOH","Aldehyde (anti-Markovnikov enol, then tautomerization)."],
+ ["9","What are tautomers?","Isomers that interconvert quickly by moving a proton (keto ⇌ enol). The keto form dominates."],
+ ["9","H₂, Lindlar catalyst on an alkyne","cis-alkene (syn addition, stops at the alkene)."],
+ ["9","Li or Na in NH₃(l) on an alkyne","trans-alkene (radical-anion intermediate)."],
+ ["9","H₂, Pd/C on an alkyne","Alkane. The alkene intermediate isn't seen because it reduces faster."],
+ ["9","KMnO₄ or O₃ on an internal alkyne? A terminal alkyne?","Internal: two carboxylic acids. Terminal: RCOOH + CO₂."],
+ ["9","pKa of a terminal alkyne, and a base that works?","About 25. NaNH₂ works (NH₃ pKa ≈ 35). NaOH is too weak."],
+ ["9","Why is an alkyne C–H acidic?","The sp carbon has 50% s character, so the anion's electrons sit close to the nucleus."],
+ ["9","Acetylide + 2° or 3° alkyl halide","Mostly E2 elimination (an alkene), not alkylation. Use methyl or 1° halides only."],
+ ["9","Synthesize octane from 1-pentyne","1) NaNH₂  2) CH₃CH₂CH₂Br  3) H₂, Pd/C."],
+ ["10","Name CH₃CHBrCH(CH₃)CH₂CH₃","2-bromo-3-methylpentane. The halogen is a substituent; list substituents alphabetically and use the lowest numbers."],
+ ["10","Trend in C–X bond length and strength going down the group","Length increases (F → I). Strength decreases (C–F 460 → C–I 239 kJ/mol)."],
+ ["10","Relative reactivity of H in radical chlorination?","3° : 2° : 1° = 5.0 : 3.5 : 1.0."],
+ ["10","Initiation step of radical chlorination?","Cl₂ + hν → 2 Cl• (homolytic cleavage)."],
+ ["10","Propagation steps of CH₄ chlorination?","Cl• + CH₄ → HCl + •CH₃, then •CH₃ + Cl₂ → CH₃Cl + Cl•."],
+ ["10","Why is radical halogenation poor for synthesis?","It gives mixtures: polyhalogenation plus several constitutional isomers."],
+ ["10","Cyclohexene + NBS, hν, CCl₄","3-bromocyclohexene (allylic bromination)."],
+ ["10","Why use NBS instead of Br₂ for allylic bromination?","NBS keeps Br₂/Br• at a low concentration, so allylic H substitution wins over Br₂ addition to the C=C."],
+ ["10","Radical stability order","vinylic < methyl < 1° < 2° < 3° < allylic."],
+ ["10","Why is the allyl radical stable?","Resonance: 3 electrons spread over 3 p orbitals. The unpaired electron is on C1 and C3. About 40 kJ/mol more stable than an alkyl radical."]
+];;
+const E3_Q=[
+ ["7","Vinylcyclohexane reacts with HBr. Which product comes from a carbocation rearrangement?",["(1-bromoethyl)cyclohexane","1-bromo-1-ethylcyclohexane","1-bromo-2-ethylcyclohexane","2-cyclohexylethyl bromide"],1,"Protonating CH=CH₂ gives a 2° cation next to the ring CH. A 1,2-hydride shift from the ring carbon makes a 3° ring cation, and Br⁻ adds there."],
+ ["7","Which carbocation is LEAST likely to rearrange?",["3-methyl-2-butyl cation","3,3-dimethyl-2-butyl cation","2-methyl-2-butyl cation","3-methyl-2-pentyl cation"],2,"The 2-methyl-2-butyl cation is already tertiary. No 1,2-shift can make it more stable."],
+ ["7","HCl + 3,3-dimethyl-1-butene gives mostly:",["3-chloro-2,2-dimethylbutane","1-chloro-3,3-dimethylbutane","2-chloro-2,3-dimethylbutane","2-chloro-3,3-dimethylbutane"],2,"The 2° cation at C2 sits next to a quaternary carbon with no H. A 1,2-methyl shift gives a 3° cation at C3, and Cl adds there."],
+ ["8","Which reagents convert bromocyclohexane into cyclohexene?",["NaBH₄","KOH, CH₃CH₂OH","Br₂, CH₂Cl₂","H₂, Pd/C"],1,"Base-promoted dehydrohalogenation (elimination of HBr) is the 8.1 preview reaction."],
+ ["8","Cyclopentene + Br₂ in CH₂Cl₂ gives:",["cis-1,2-dibromocyclopentane","trans-1,2-dibromocyclopentane","1,1-dibromocyclopentane","3-bromocyclopentene"],1,"Br₂ adds anti through a bromonium ion, so the two Br end up trans."],
+ ["8","Which alkene gives a MESO dibromide with Br₂?",["cis-2-butene","trans-2-butene","2-methylpropene","1-butene"],1,"Anti addition to trans-2-butene gives meso-2,3-dibromobutane. cis-2-butene gives the racemate."],
+ ["8","The intermediate in Br₂ addition to an alkene is a:",["Free carbocation","Carbanion","Cyclic bromonium ion","Radical"],2,"The three-membered bromonium ion blocks one face, which forces back-side (anti) attack."],
+ ["8","1-methylcyclohexene + Br₂, H₂O gives:",["trans-2-bromo-1-methylcyclohexanol","cis-2-bromo-1-methylcyclohexanol","trans-1-bromo-2-methylcyclohexanol","1,2-dibromo-1-methylcyclohexane"],0,"Water attacks the more substituted carbon (C1, which carries more δ+). Br and OH are anti, so they're trans on the ring."],
+ ["8","3,3-dimethyl-1-butene + Hg(OAc)₂, H₂O; then NaBH₄ gives:",["2,3-dimethyl-2-butanol","3,3-dimethyl-1-butanol","3,3-dimethyl-2-butanol","2,2-dimethyl-1-butanol"],2,"Oxymercuration is Markovnikov and goes through a mercurinium ion with no free cation, so no methyl shift occurs."],
+ ["8","1-methylcyclopentene + BH₃·THF; then H₂O₂, NaOH gives:",["1-methylcyclopentanol","cis-2-methylcyclopentanol","trans-2-methylcyclopentanol","Cyclopentylmethanol"],2,"OH goes to the less substituted C2 (anti-Markovnikov). H and OH add syn, so the new H on C1 is cis to OH and CH₃ ends up trans."],
+ ["8","Which statement about hydroboration–oxidation is FALSE?",["Addition is syn","OH ends up on the less substituted carbon","It goes through a carbocation that can rearrange","B adds to the less hindered carbon"],2,"Hydroboration is a concerted four-center addition. No carbocation forms, so there's no rearrangement."],
+ ["8","2-methyl-2-butene + BH₃; then H₂O₂, NaOH gives:",["2-methyl-2-butanol","3-methyl-2-butanol","2-methyl-1-butanol","3-methyl-1-butanol"],1,"OH goes on the less substituted alkene carbon (C3), which gives 3-methyl-2-butanol."],
+ ["8","1,2-dimethylcyclohexene + H₂, Pd/C gives:",["trans-1,2-dimethylcyclohexane","cis-1,2-dimethylcyclohexane","A racemic mixture of trans isomers","1,1-dimethylcyclohexane"],1,"Both H atoms add to the same face from the catalyst surface (syn), so the two methyls end up cis."],
+ ["8","Under normal conditions, H₂/Pd does NOT reduce:",["The C=C of cyclohexene","The C≡C of 2-butyne","A benzene ring","The vinyl group of styrene"],2,"Aromatic rings (and ketones) survive normal catalytic hydrogenation. Alkenes and alkynes are reduced."],
+ ["8","cis-2-butene + mCPBA gives:",["trans-2,3-dimethyloxirane (racemic)","cis-2,3-dimethyloxirane","2-butanone","cis-2,3-butanediol"],1,"Epoxidation is a one-step syn addition, so the alkene's geometry carries into the epoxide."],
+ ["8","Which sequence converts cyclohexene into trans-1,2-cyclohexanediol?",["OsO₄; then NaHSO₃","1) mCPBA  2) H₃O⁺","BH₃; then H₂O₂, NaOH","O₃; then Zn, CH₃CO₂H"],1,"Acid opens the epoxide from the back side, so the two OH groups end up anti (trans). OsO₄ gives the cis diol."],
+ ["8","2-methyl-2-pentene + O₃; then Zn, CH₃CO₂H gives:",["Acetone + propanal","Acetaldehyde + 2-butanone","Acetone + propanoic acid","Two equivalents of propanal"],0,"(CH₃)₂C=CHCH₂CH₃ breaks into (CH₃)₂C=O (acetone) and O=CHCH₂CH₃ (propanal)."],
+ ["8","An alkene C₇H₁₂ gives only cyclohexanone and formaldehyde on ozonolysis. It is:",["1-methylcyclohexene","Methylenecyclohexane","3-methylcyclohexene","1-heptyne"],1,"Cyclohexanone + H₂C=O means the C=C joined the ring carbon to a CH₂ outside the ring: methylenecyclohexane."],
+ ["8","1-methylcyclohexene + KMnO₄, H₃O⁺ gives:",["6-oxoheptanal","6-oxoheptanoic acid","Heptanedioic acid","2-methylcyclohexanone"],1,"The ring opens. The CH carbon becomes COOH, and the C bearing CH₃ becomes a ketone: CH₃CO(CH₂)₄COOH."],
+ ["8","cis-1,2-cyclohexanediol + HIO₄ gives:",["Cyclohexanone","Hexanedioic acid","Hexanedial","Cyclohexene"],2,"Periodic acid breaks the C1–C2 bond. Each carbon becomes CHO: OHC(CH₂)₄CHO."],
+ ["8","cis-2-butene + CHCl₃, KOH gives:",["trans-1,1-dichloro-2,3-dimethylcyclopropane","cis-1,1-dichloro-2,3-dimethylcyclopropane","2,2-dichlorobutane","1,1-dichloro-2-butene"],1,"Base makes :CCl₂, which adds in one step, so the alkene geometry is kept."],
+ ["8","The Simmons–Smith reagent is made from:",["CHCl₃ + KOH","CH₂N₂ + light","CH₂I₂ + Zn(Cu)","CH₃I + Mg"],2,"CH₂I₂ + Zn(Cu) gives ICH₂ZnI, a carbenoid that adds CH₂ to make a cyclopropane."],
+ ["8","In radical polymerization, R• + CH₂=CH₂ → RCH₂CH₂• is:",["Initiation","Propagation","Termination","Chain transfer to monomer"],1,"A radical adds to a monomer and makes a new radical. This step repeats, so it's propagation."],
+ ["8","The monomer for poly(vinyl chloride) is:",["CH₂=CCl₂","CF₂=CF₂","CH₂=CHCl","CH₂=CHCN"],2,"Vinyl chloride, CH₂=CHCl."],
+ ["9","The IUPAC name of (CH₃)₂CHC≡CCH₂CH₃ is:",["5-methyl-3-hexyne","2-methyl-3-hexyne","2-methyl-4-hexyne","1-isopropyl-1-butyne"],1,"The triple bond is C3 from either end, so the methyl decides the direction: number from the isopropyl end, giving 2-methyl."],
+ ["9","The IUPAC name of CH₂=CHCH₂C≡CH is:",["Pent-4-en-1-yne","Pent-1-en-4-yne","Pent-1-yn-4-ene","1,4-pentenyne"],1,"Both directions give locants 1 and 4. On a tie, the double bond gets the lower number."],
+ ["9","Which converts 1,2-dibromopentane into 1-pentyne?",["H₂, Lindlar","2 equiv KOH (or NaNH₂), heat","Br₂, CH₂Cl₂","HgSO₄, H₂SO₄"],1,"Two E2 eliminations of HBr (through a vinyl bromide) give the alkyne."],
+ ["9","1-hexyne + 2 equiv HBr gives:",["1,2-dibromohexane","1,1-dibromohexane","2,2-dibromohexane","(E)-1,2-dibromo-1-hexene"],2,"Both HBr additions are Markovnikov, so both Br end up on C2 (a geminal dihalide)."],
+ ["9","2-butyne + 1 equiv Br₂ gives mainly:",["(Z)-2,3-dibromo-2-butene","(E)-2,3-dibromo-2-butene","2,2,3,3-tetrabromobutane","2-bromo-2-butene"],1,"The first addition is anti, so the two Br end up trans (E). Excess Br₂ would give the tetrabromide."],
+ ["9","1-hexyne + H₂SO₄, H₂O, HgSO₄ gives:",["Hexanal","2-hexanone","3-hexanone","1-hexanol"],1,"Markovnikov hydration gives an enol with OH on C2, which tautomerizes to the methyl ketone."],
+ ["9","1-hexyne + BH₃; then H₂O₂, NaOH gives:",["Hexanal","2-hexanone","1-hexanol","Hexanoic acid"],0,"Anti-Markovnikov: the enol OH is on C1, and it tautomerizes to the aldehyde."],
+ ["9","Hydration of 2-pentyne with HgSO₄/H₂SO₄ gives:",["Only 2-pentanone","Only 3-pentanone","A mixture of 2-pentanone and 3-pentanone","Pentanal"],2,"An unsymmetrical internal alkyne has two similar ends, so both ketones form. That's why this isn't useful for synthesis."],
+ ["9","Keto–enol tautomers differ in the position of:",["A carbon atom only","A proton and a double bond","An oxygen atom","A lone pair only"],1,"Tautomers interconvert by moving an H (from O to C) along with the C=C → C=O double bond."],
+ ["9","3-hexyne + Na, NH₃(l) gives:",["cis-3-hexene","trans-3-hexene","Hexane","3-hexanone"],1,"Dissolving-metal reduction goes through a radical anion and vinylic anion that adopt the trans geometry."],
+ ["9","Which converts 3-hexyne into cis-3-hexene?",["H₂, Pd/C","Li, NH₃(l)","H₂, Lindlar catalyst","BH₃; H₂O₂, NaOH"],2,"The Lindlar catalyst adds H₂ syn and stops at the alkene."],
+ ["9","2-pentyne + KMnO₄ (then H₃O⁺) gives:",["Acetic acid + propanoic acid","Two equivalents of propanoic acid","2,3-pentanedione","Butanoic acid + CO₂"],0,"Oxidative cleavage of an internal alkyne gives two carboxylic acids: CH₃COOH and CH₃CH₂COOH."],
+ ["9","Which base can fully deprotonate a terminal alkyne (pKa ≈ 25)?",["NaOH","NaHCO₃","NaNH₂","NaOCH₃"],2,"NH₃ (pKa ≈ 35) is a weaker acid than the alkyne, so NH₂⁻ is strong enough. The others have conjugate acids with pKa ≈ 16 or lower."],
+ ["9","Terminal alkynes are more acidic than alkenes because:",["The C≡C π bonds stabilize the anion","The sp carbon has 50% s character","Alkynes are more polarizable","The anion is resonance stabilized"],1,"More s character holds the lone pair closer to the nucleus, which stabilizes the acetylide."],
+ ["9","Which alkyl halide gives the BEST yield with sodium acetylide?",["2-bromopropane","tert-butyl bromide","1-bromopropane","Bromocyclohexane"],2,"Acetylides are strong bases. With 2° and 3° halides they cause E2 elimination, so only methyl and 1° halides alkylate well."],
+ ["9","Which sequence makes octane from 1-pentyne?",["1) NaNH₂  2) CH₃CH₂CH₂Br  3) H₂, Pd/C","1) NaNH₂  2) CH₃CH₂Br  3) H₂, Lindlar","1) H₂, Pd/C  2) CH₃CH₂CH₂Br","1) HBr  2) CH₃CH₂CH₂Li"],0,"5 C + 3 C = 8 C. Alkylate the acetylide with a 1° propyl halide, then reduce the alkyne completely."],
+ ["9","Which route gives cis-2-hexene from 1-pentyne?",["1) NaNH₂  2) CH₃I  3) Li, NH₃","1) NaNH₂  2) CH₃I  3) H₂, Lindlar","1) H₂, Lindlar  2) CH₃I","1) NaNH₂  2) CH₃CH₂Br  3) H₂, Lindlar"],1,"Adding a methyl gives 2-hexyne (6 C), and Lindlar reduction gives the cis alkene. Li/NH₃ would give trans."],
+ ["10","The IUPAC name of CH₃CHBrCH(CH₃)CH₂CH₃ is:",["4-bromo-3-methylpentane","2-bromo-3-methylpentane","3-methyl-2-bromopentane","2-methyl-3-bromopentane"],1,"Number for the lowest locants (2,3 rather than 3,4) and list substituents alphabetically: bromo before methyl."],
+ ["10","Which halomethane has the longest and weakest C–X bond?",["CH₃F","CH₃Cl","CH₃Br","CH₃I"],3,"C–I is 214 pm and 239 kJ/mol. Bonds get longer and weaker going down the group."],
+ ["10","Light-initiated chlorination of propane gives about what % of 2-chloropropane? (3°:2°:1° = 5.0:3.5:1.0)",["25%","46%","54%","75%"],2,"2 secondary H × 3.5 = 7. 6 primary H × 1.0 = 6. 7 ÷ 13 ≈ 54%."],
+ ["10","Monochlorination of 2-methylpropane gives 2-chloro-2-methylpropane in about what % yield?",["10%","36%","64%","90%"],1,"1 tertiary H × 5.0 = 5. 9 primary H × 1.0 = 9. 5 ÷ 14 ≈ 36%, which matches the 35:65 ratio on your slide."],
+ ["10","How many constitutional isomers form on monochlorination of 2-methylbutane?",["2","3","4","5"],2,"There are four kinds of H: the two equivalent CH₃ groups on C2, the C2–H, the C3–H₂, and the C4–H₃. So: 1-chloro-2-methyl, 2-chloro-2-methyl, 2-chloro-3-methyl, and 1-chloro-3-methylbutane."],
+ ["10","The initiation step of radical chlorination is:",["Cl• + CH₄ → HCl + •CH₃","•CH₃ + Cl₂ → CH₃Cl + Cl•","Cl₂ + hν → 2 Cl•","Cl• + •CH₃ → CH₃Cl"],2,"Initiation makes radicals from a non-radical by homolysis. B and A are propagation, and D is termination."],
+ ["10","Cyclohexene + NBS, hν, CCl₄ gives:",["Bromocyclohexane","trans-1,2-dibromocyclohexane","3-bromocyclohexene","1-bromocyclohexene"],2,"NBS replaces an allylic H (on the carbon next to the C=C) with Br."],
+ ["10","1-butene + NBS, hν gives which pair of products?",["3-bromo-1-butene and 1-bromo-2-butene","1-bromobutane and 2-bromobutane","1,2-dibromobutane and 2-bromobutane","4-bromo-1-butene only"],0,"The allylic radical is delocalized over C1 and C3, so Br can bond at either end."],
+ ["10","Why is NBS used instead of Br₂ for allylic bromination?",["NBS is a stronger oxidant","NBS keeps the Br₂ concentration low, so substitution beats addition","NBS adds anti across the C=C","NBS forms a carbocation at the allylic carbon"],1,"With very little Br₂ present, addition to the C=C is slow, and the radical chain substitution at the allylic C–H wins."],
+ ["10","Rank the radicals from MOST to LEAST stable: I allyl, II tert-butyl, III vinyl, IV ethyl",["II > I > IV > III","I > II > IV > III","I > II > III > IV","II > IV > I > III"],1,"Allylic > 3° > 1° > vinylic. Resonance makes the allyl radical more stable than even a 3° radical."],
+ ["10","In the allyl radical, the unpaired electron is located:",["Only on C2","Equally on C1 and C3","Only on C1","In an sp³ orbital on C2"],1,"Resonance spreads the unpaired electron over the terminal carbons, C1 and C3. Three electrons occupy the three-orbital π system."]
+];;
+const E4_SHEET=[
+ {title:"10.6–10.9: making and using alkyl halides",head:["§","Reaction","Reagents","Outcome"],rows:[
+  ["10.6","3° alcohol → 3° alkyl halide","HCl or HBr (gas) in ether","Fast, through a carbocation (SN1). Reactivity: 3° > 2° > 1° > methyl."],
+  ["10.6","1° or 2° alcohol → alkyl chloride","SOCl₂ (pyridine or ether)","Chlorosulfite intermediate, then Cl⁻ attacks by SN2. Inversion, no rearrangement."],
+  ["10.6","1° or 2° alcohol → alkyl bromide","PBr₃, ether","Dibromophosphite intermediate, then Br⁻ attacks by SN2. Inversion, no rearrangement."],
+  ["10.7","Grignard formation","R–X + Mg, ether or THF","R–MgX. R can be 1°, 2°, 3°, aryl or alkenyl. X = Cl, Br, I (not F)."],
+  ["10.7","Grignard + acid","1) Mg, ether  2) H₃O⁺","R–X → R–H (a reduction). D₂O gives R–D."],
+  ["10.8","Alkyllithium","R–Br + 2 Li, pentane","R–Li + LiBr"],
+  ["10.8","Gilman reagent","2 R–Li + CuI, ether","R₂CuLi (lithium dialkylcopper)"],
+  ["10.8","Organometallic coupling","R₂CuLi + R′–X","R–R′. Works with alkyl, vinyl and aryl halides. Vinyl geometry is kept."],
+  ["10.9","Oxidation vs reduction","—","Oxidation: lose C–H, gain C–O/N/X. Reduction: gain C–H, lose C–O/N/X. Adding H₂O or HX is neither."]
+ ]},
+ {title:"Chapter 11: substitution and elimination",head:["§","Mechanism","Rate law","Stereo / substrate","Favored by"],rows:[
+  ["11.2–11.3","SN2","k[RX][Nu]","Inversion (Walden). CH₃ > 1° > 2° ≫ 3°. No vinyl or aryl.","Strong Nu, good LG, polar aprotic solvent"],
+  ["11.4–11.5","SN1","k[RX]","Racemization with some inversion. 3°, allylic, benzylic. Rearrangements possible.","Good LG, polar protic solvent. Nu doesn't affect rate."],
+  ["11.7–11.9","E2","k[RX][Base]","Anti-periplanar (trans-diaxial in rings). Stereospecific. Zaitsev.","Strong base. 2° and 3° substrates."],
+  ["11.10","E1","k[RX]","Carbocation. Zaitsev. No geometry requirement.","Weak base, polar protic solvent, 3°. Competes with SN1."],
+  ["11.10","E1cB","k[substrate][Base]","Carbanion (conjugate base) intermediate.","Poor LG (often OH) β to a C=O."]
+ ]},
+ {title:"Chapter 12: mass spectrometry and the spectrum",head:["§","Topic","What to know"],rows:[
+  ["12.1","How MS works","An electron beam knocks off one electron, making a radical cation M⁺•. It fragments, and ions are sorted by m/z."],
+  ["12.1","The spectrum","x-axis is m/z, y-axis is intensity. Base peak = tallest (100%). Molecular ion (parent peak) = M⁺."],
+  ["12.2","Exact mass","High resolution separates formulas with the same nominal mass: C₅H₁₂ is 72.0939, C₄H₈O is 72.0575 (¹H 1.00783, ¹²C 12.0000, ¹⁶O 15.99491)."],
+  ["12.2","Isotope peaks","M+1 from ¹³C is about 1.1% of M per carbon. Soft methods (chemical ionization) help when M⁺ is missing."],
+  ["12.3","Fragmentation","The positive charge stays on the fragment that best stabilizes it. Hydrocarbons lose 14-mass (CH₂) steps."],
+  ["12.3","Functional groups","Alcohols: α-cleavage and dehydration (M − 18). Amines: odd M⁺ (nitrogen rule) and α-cleavage. Halides: Cl gives M+2 at ⅓ of M, Br gives M+2 ≈ M. Carbonyls: α-cleavage (acylium ion) and McLafferty (needs a γ-H)."],
+  ["12.4","Biological MS","Soft ionization of large molecules: ESI (electrospray) and MALDI. Time-of-flight (TOF) analyzers."],
+  ["12.5","Electromagnetic spectrum","E = hν = hc/λ. Higher frequency, shorter wavelength, and higher wavenumber all mean more energy. IR is lower in energy than visible light."]
+ ]},
+ {title:"Chapter 12: IR absorptions (12.6–12.8)",head:["Bond / group","Wavenumber (cm⁻¹)","Look"],rows:[
+  ["O–H (alcohol)","3400–3650","Broad, intense"],
+  ["N–H (amine)","3300–3500","Sharper and weaker than O–H"],
+  ["≡C–H (terminal alkyne)","~3300","Sharp, strong"],
+  ["=C–H (alkene) / Ar–H","3020–3100 / 3030","Medium / weak"],
+  ["C–H (alkane)","2850–2960","Strong"],
+  ["C≡C / C≡N","2100–2260","C≡C weak, C≡N medium"],
+  ["C=O aldehyde","1730 (1705 if conjugated)","Strong, sharp"],
+  ["C=O ketone","1715 (acyclic or 6-ring), 1750 (5-ring), 1690 (conjugated)","Strong, sharp"],
+  ["C=O ester","1735 (1715 if conjugated)","Strong, sharp"],
+  ["C=C (alkene)","1640–1680","Medium"],
+  ["Aromatic ring","1450–1600 (and weak 1660–2000)","Medium"],
+  ["Fingerprint region","below 1500","Unique to each molecule"]
+ ]},
+ {title:"Chapter 13: NMR numbers",head:["§","Topic","What to know"],rows:[
+  ["13.1","Spin states","In field B₀, spins align parallel (lower energy, more populated) or antiparallel. Radio waves at resonance flip them. ΔE grows as B₀ grows."],
+  ["13.2","Shielding","Electrons shield the nucleus, so different environments resonate at different positions. Solvent: CDCl₃."],
+  ["13.3","Chemical shift","δ (ppm) relative to TMS = 0. Left = downfield = deshielded. Right = upfield = shielded. ppm doesn't depend on the instrument's field strength."],
+  ["13.4","¹³C and FT-NMR","¹³C is only 1.1% of carbon, so many pulses are averaged and Fourier-transformed."],
+  ["13.5","¹³C shifts","0–220 ppm. sp³ C: 0–90. sp² C: 110–220. C=O: 160–220. Electronegative neighbors shift downfield. One peak per kind of carbon."],
+  ["13.6","DEPT","DEPT-90: CH only. DEPT-135: CH₃ and CH positive, CH₂ negative. Quaternary C is missing from both."],
+  ["13.7","Uses of ¹³C","Count signals to tell products apart. Elimination of 1-chloro-1-methylcyclohexane gives 7 signals (5 sp³ + 2 sp²): 1-methylcyclohexene."],
+  ["13.9","¹H shifts","Saturated 0–1.5 · allylic 1.5–2.5 · H–C–O/N/X 2.5–4.5 · vinylic 4.5–6.5 · aromatic 6.5–8 · aldehyde 9.7–10 · carboxylic acid 11–12"],
+  ["13.10","Integration","Peak area ∝ number of H. Ethanol is 3 : 2 : 1."],
+  ["13.11","Splitting","n + 1 rule. Ethyl: 3H triplet + 2H quartet. Isopropyl: 6H doublet + 1H septet. tert-Butyl: 9H singlet."],
+  ["13.12","Complex splitting","Non-equivalent neighbors with different J give a doublet of doublets, etc. (trans-cinnamaldehyde)."],
+  ["13.13","Uses of ¹H","Hydroboration of methylenecyclohexane: a 2H doublet at δ 3.4 (CH₂OH) proves cyclohexylmethanol, not 1-methylcyclohexanol."]
+ ]}
+];;
+const E4_CARDS=[
+ ["10","3° alcohol → 3° alkyl chloride","HCl (gas) in ether. Fast, by an SN1 pathway."],
+ ["10","1° or 2° alcohol → alkyl chloride without rearrangement","SOCl₂ (pyridine). SN2, so the configuration is inverted."],
+ ["10","1° or 2° alcohol → alkyl bromide","PBr₃ in ether. SN2 with inversion."],
+ ["10","Why do 1° and 2° alcohols react poorly with HX?","They react very slowly and often rearrange, so SOCl₂ or PBr₃ are used instead."],
+ ["10","R–X + Mg in ether","Grignard reagent R–MgX. The carbon is strongly basic and nucleophilic (δ⁻)."],
+ ["10","Which halogens form Grignard reagents?","Cl, Br and I. Not F."],
+ ["10","R–MgBr + H₃O⁺ (or D₂O)","R–H (or R–D). Overall R–X → R–H is a reduction."],
+ ["10","Make a Gilman reagent","2 R–Li + CuI → R₂CuLi. (R–Li comes from R–Br + 2 Li.)"],
+ ["10","(CH₃)₂CuLi + iodobenzene","Toluene. Gilman reagents couple with alkyl, vinyl and aryl halides."],
+ ["10","Organic definition of oxidation","Break C–H (or C–C), form C–O, C–N or C–X. Loss of electron density at carbon."],
+ ["10","Is CH₂=CH₂ + H₂O → CH₃CH₂OH oxidation or reduction?","Neither. One C gains H and the other gains O, so the net level doesn't change."],
+ ["11","What did Walden's cycle show?","Nucleophilic substitution can invert the configuration at a chirality center."],
+ ["11","SN2 rate law and order","Rate = k[RX][Nu]. Second order (bimolecular)."],
+ ["11","SN2 stereochemistry","100% inversion (back-side attack). The TS has a roughly planar carbon with Nu and LG 180° apart."],
+ ["11","SN2 substrate order","Methyl > 1° > 2° ≫ 3° (no reaction). Vinyl and aryl halides don't react."],
+ ["11","Best solvents for SN2","Polar aprotic: DMSO, DMF, acetone, CH₃CN. Protic solvents H-bond to the Nu and slow it down."],
+ ["11","Nucleophilicity trends","More basic is faster (same atom). Lower in a column is better (I⁻ > Br⁻ > Cl⁻). Anions beat neutrals."],
+ ["11","Leaving-group order","TosO⁻ > I⁻ > Br⁻ > Cl⁻ > F⁻ ≫ OH⁻, NH₂⁻, RO⁻. Weak bases leave well."],
+ ["11","Why don't alcohols do SN2 directly?","OH⁻ is a strong base and a poor leaving group. Protonate it (H₂O leaves) or convert it to a tosylate or halide."],
+ ["11","SN1 rate law","Rate = k[RX]. The nucleophile isn't in the rate-determining step."],
+ ["11","SN1 stereochemistry","Planar carbocation, so mostly racemic. An ion pair gives a slight excess of inversion."],
+ ["11","SN1 substrate order","3° > 2°. Allylic and benzylic (even 1°) work because of resonance."],
+ ["11","Best solvents for SN1","Polar protic (H₂O, alcohols, formic acid). They stabilize the carbocation and its TS."],
+ ["11","Zaitsev's rule","Elimination mainly gives the more substituted (more stable) alkene."],
+ ["11","E2 rate law and geometry","Rate = k[RX][B]. H and LG anti-periplanar. Trans-diaxial on cyclohexanes."],
+ ["11","Deuterium isotope effect in E2","C–D breaks more slowly than C–H, so the C–H bond breaks in the rate-determining step."],
+ ["11","meso-1,2-dibromo-1,2-diphenylethane + base","The alkene with the two phenyl groups cis. (R,R) or (S,S) gives phenyls trans."],
+ ["11","E1 features","Rate = k[RX], carbocation, Zaitsev, no strong base needed, not stereospecific. Competes with SN1."],
+ ["11","E1cB","Base removes H first, giving a carbanion (often an enolate), then the poor LG (OH) leaves. Common in biology."],
+ ["11","Substrate in biological SN reactions","Organodiphosphates, not alkyl halides."],
+ ["11","2° halide + strong base (NaOEt)","E2 is the major pathway."],
+ ["11","3° halide + H₂O or ethanol, heat","SN1 + E1 mixture (e.g. 64% alcohol, 36% alkene)."],
+ ["12","What is M⁺•?","The molecular ion: the whole molecule minus one electron (a radical cation). Gives the molecular weight."],
+ ["12","Base peak","The tallest peak, set to 100%. Not necessarily M⁺."],
+ ["12","Why use high-resolution (exact) mass?","To tell apart formulas with the same nominal mass (C₅H₁₂ 72.0939 vs C₄H₈O 72.0575)."],
+ ["12","M+1 peak","From ¹³C, about 1.1% of M per carbon. Estimates the number of carbons."],
+ ["12","M and M+2 in a 3:1 ratio? 1:1?","3:1 means Cl (³⁵Cl/³⁷Cl). 1:1 means Br (⁷⁹Br/⁸¹Br)."],
+ ["12","McLafferty rearrangement","A carbonyl with a γ-H transfers that H to O and splits into an alkene plus an enol radical cation."],
+ ["12","α-cleavage of a ketone","The bond next to C=O breaks, giving R• plus an acylium ion R′C≡O⁺."],
+ ["12","Alcohol MS features","α-cleavage and dehydration (M − 18)."],
+ ["12","Energy vs wavelength and wavenumber","E = hν = hc/λ. Shorter λ and higher wavenumber both mean more energy."],
+ ["12","O–H vs N–H stretch","O–H: 3400–3650, broad and strong. N–H: 3300–3500, sharper and weaker."],
+ ["12","Terminal alkyne IR","≡C–H at about 3300 (sharp) plus C≡C at about 2100–2260."],
+ ["12","Alkene IR","=C–H at 3020–3100 plus C=C at 1640–1680."],
+ ["12","Ketone C=O values","1715 (acyclic or 6-ring), 1750 (5-ring), 1690 (conjugated)."],
+ ["12","Aldehyde and ester C=O","Aldehyde 1730 (1705 conjugated). Ester 1735 (1715 conjugated)."],
+ ["12","Which bonds absorb at the highest wavenumbers?","Light atoms on heavy ones (C–H, N–H, O–H). Among heavy atoms, stronger is higher: C≡C > C=C > C–C."],
+ ["12","Fingerprint region","Below 1500 cm⁻¹. Characteristic of the whole molecule."],
+ ["13","Which spin state is lower in energy?","Parallel to the applied field. It is slightly more populated."],
+ ["13","NMR reference and solvent","TMS at δ 0. Solvent CDCl₃ (no ¹H signal)."],
+ ["13","Downfield means…","Left side, higher δ, deshielded (near electronegative atoms or sp² C)."],
+ ["13","Why report δ in ppm?","It doesn't depend on the spectrometer's field strength."],
+ ["13","Why does ¹³C need FT and signal averaging?","¹³C is only 1.1% of carbon, so the signal is weak. Many pulses are averaged."],
+ ["13","¹³C shift ranges","sp³ 0–90, sp² 110–220, C=O 160–220 ppm."],
+ ["13","DEPT-90 and DEPT-135","DEPT-90: CH only. DEPT-135: CH₃ and CH up, CH₂ down. Quaternary C doesn't appear."],
+ ["13","Homotopic, enantiotopic and diastereotopic H","Homotopic and enantiotopic: same signal. Diastereotopic (CH₂ near a chirality center): different signals."],
+ ["13","¹H shift regions","Saturated 0–1.5 · allylic 1.5–2.5 · H–C–O/N/X 2.5–4.5 · vinylic 4.5–6.5 · aromatic 6.5–8 · CHO 9.7–10."],
+ ["13","What does integration tell you?","The relative number of H in each signal (ethanol 3:2:1)."],
+ ["13","n + 1 rule","A proton with n equivalent neighbors splits into n + 1 peaks. Quartet intensities are 1:3:3:1."],
+ ["13","Ethyl group pattern","3H triplet + 2H quartet."],
+ ["13","Isopropyl group pattern","6H doublet + 1H septet."],
+ ["13","tert-Butyl group pattern","9H singlet."],
+ ["13","Coupling constant J","Peak spacing in Hz. The same value appears in both coupled signals and doesn't depend on field strength."]
+];;
+const E4_Q=[
+ ["10","Which reagent converts 1-butanol to 1-bromobutane without rearrangement?",["PBr₃, ether","NBS, hν","Br₂, CH₂Cl₂","Mg, ether"],0,"PBr₃ turns OH into a good leaving group (a dibromophosphite), and Br⁻ then displaces it by SN2. No carbocation forms, so nothing rearranges."],
+ ["10","Which alcohol reacts FASTEST with HBr?",["Methanol","1-propanol","2-propanol","2-methyl-2-propanol"],3,"Alcohol + HX goes through a carbocation, so the order is 3° > 2° > 1° > methyl. tert-Butyl alcohol reacts fastest."],
+ ["10","(R)-2-butanol + SOCl₂ (pyridine) gives mainly:",["(R)-2-chlorobutane","(S)-2-chlorobutane","Racemic 2-chlorobutane","2-butene"],1,"The chlorosulfite is displaced by Cl⁻ through SN2 back-side attack. Cl ranks first like OH did, so the geometric inversion gives S."],
+ ["10","Which compound does NOT normally form a Grignard reagent with Mg?",["CH₃CH₂Br","Bromobenzene","CH₃CH₂F","CH₃CH₂I"],2,"Grignard reagents form from R–Cl, R–Br and R–I. The C–F bond is too strong."],
+ ["10","CH₃CH₂CH₂MgBr + D₂O gives:",["CH₃CH₂CH₂OD","CH₃CH₂CH₂D","CH₃CH₂CH₂Br","CH₃CH₂CH₃"],1,"The Grignard carbon is a strong base and takes D⁺ from D₂O, giving R–D. This is a way to label a molecule with deuterium."],
+ ["10","A lithium dialkylcopper (Gilman) reagent is made from:",["R–MgBr + CuI","2 R–Li + CuI","R–Br + Cu","R₂Zn + CuI"],1,"2 RLi + CuI → R₂CuLi + LiI (ether). RLi itself comes from RBr + 2 Li."],
+ ["10","(CH₃)₂CuLi + 1-iododecane gives:",["Decane","1-methyldecane (undecane)","2-iodoundecane","1-decene"],1,"Gilman coupling replaces I with CH₃: CH₃(CH₂)₉–CH₃ = undecane."],
+ ["10","(n-C₄H₉)₂CuLi + trans-1-iodo-1-nonene gives:",["cis-5-tridecene","trans-5-tridecene","Tridecane","A mixture of cis and trans"],1,"Vinyl halides couple with the double-bond geometry kept, so the product is trans-5-tridecene (71% on your slide)."],
+ ["10","Which conversion is an OXIDATION?",["CH₃OH → H₂C=O","CH₃Cl → CH₄","H₂C=CH₂ → CH₃CH₃","CH₂=CH₂ → CH₃CH₂Br (+HBr)"],0,"Methanol to formaldehyde breaks a C–H and forms a second C–O bond. B and C are reductions, and adding HBr is neither."],
+ ["10","Which compound is at the HIGHEST oxidation level?",["CH₃OH","H₂C=O","HCO₂H","CH₂Cl₂"],2,"Formic acid has three bonds from C to O, at the same level as CHCl₃ and HC≡N. Only CO₂ and CCl₄ are higher."],
+ ["10","Chloromethane → methane using 1) Mg, ether 2) H₃O⁺ is:",["An oxidation","A reduction","Neither","An elimination"],1,"A C–Cl bond is broken and a C–H bond is formed, so it's a reduction."],
+ ["11","Walden's experiments with malic acid showed that:",["SN1 reactions always racemize","Nucleophilic substitution can invert configuration","Optical rotation doesn't depend on chirality","Carbocations are planar"],1,"Going around the cycle with achiral reagents changed (−)-malic acid into (+)-malic acid, so substitution inverted the chirality center."],
+ ["11","For an SN2 reaction, doubling [Nu⁻] and doubling [RX] changes the rate by a factor of:",["1","2","4","8"],2,"Rate = k[RX][Nu], so 2 × 2 = 4."],
+ ["11","(S)-2-bromobutane + NaCN in DMSO gives:",["(S)-2-methylbutanenitrile","(R)-2-methylbutanenitrile","Racemic 2-methylbutanenitrile","1-butene"],1,"SN2 inverts the center. CN ranks first just as Br did, so the inversion turns S into R."],
+ ["11","Which reacts FASTEST with NaI in acetone (SN2)?",["2-bromo-2-methylpropane","2-bromopropane","1-bromopropane","Bromomethane"],3,"SN2 is very sensitive to steric hindrance: methyl > 1° > 2° ≫ 3°."],
+ ["11","Which compound is essentially UNREACTIVE by SN2?",["1-bromobutane","3-bromopropene (allyl bromide)","Bromoethene (vinyl bromide)","Benzyl bromide"],2,"Back-side attack on an sp² C=C carbon is blocked, so vinyl and aryl halides don't do SN2. Allylic and benzylic halides react quickly."],
+ ["11","Which is the BEST nucleophile in methanol?",["F⁻","Cl⁻","I⁻","H₂O"],2,"Going down a column, nucleophilicity increases in protic solvents. I⁻ is large and polarizable and only weakly solvated."],
+ ["11","Which is the BEST leaving group?",["OH⁻","F⁻","Cl⁻","TosO⁻ (tosylate)"],3,"Tosylate is a very weak base with delocalized charge (relative reactivity 60,000), better even than I⁻ (30,000)."],
+ ["11","Alcohols don't undergo SN2 with NaBr because:",["The C–O bond is too weak","OH⁻ is a strong base and a poor leaving group","Br⁻ is a poor nucleophile","Alcohols are too hindered"],1,"Good leaving groups are weak bases. OH⁻ is a strong base, so it must first be protonated or converted to a tosylate or halide."],
+ ["11","Which solvent gives the FASTEST SN2 reaction of CH₃CH₂Br with NaN₃?",["Water","Methanol","Ethanol","DMSO"],3,"Polar aprotic solvents don't H-bond to the anion, which leaves the nucleophile reactive. Protic solvents cage it."],
+ ["11","Which describes the SN2 transition state?",["A planar carbocation with no bond to the Nu","Carbon with three roughly planar groups, partial bonds to both Nu and LG on opposite sides","A carbanion","A four-membered ring"],1,"One step: the Nu bonds as the LG leaves, 180° apart, with the other three groups flattened into a plane."],
+ ["11","The rate of an SN1 reaction of tert-butyl bromide with H₂O is changed most by:",["Doubling [H₂O]","Changing the nucleophile to OH⁻","Changing the leaving group from Br⁻ to Cl⁻","Adding more nucleophile"],2,"Rate = k[RX]. The nucleophile isn't involved in the rate-determining ionization, but the leaving group is. Cl⁻ leaves more slowly than Br⁻."],
+ ["11","An optically active 3° alkyl bromide undergoes SN1 in water. The product is:",["Pure inversion","Pure retention","Racemic with a slight excess of inversion","Unchanged starting material"],2,"The planar carbocation can be attacked from either face. The departing ion pair partly blocks the front, so inversion is slightly favored."],
+ ["11","Which is the best solvent for an SN1 reaction?",["Hexane","Diethyl ether","Aqueous ethanol","Benzene"],2,"Polar protic solvents stabilize the carbocation and the transition state leading to it, which speeds up ionization."],
+ ["11","Which PRIMARY halide reacts readily by SN1?",["1-bromopropane","1-bromo-2,2-dimethylpropane","Benzyl bromide","Bromoethane"],2,"Benzylic (and allylic) carbocations are resonance-stabilized, so even primary ones can form."],
+ ["11","3-bromo-2,2-dimethylbutane heated in ethanol gives mainly which substitution product?",["3-ethoxy-2,2-dimethylbutane","2-ethoxy-2,3-dimethylbutane","1-ethoxy-2,2-dimethylbutane","No reaction"],1,"SN1 forms a 2° cation next to a quaternary carbon. A 1,2-methyl shift gives a 3° cation, and ethanol traps it."],
+ ["11","2-bromo-2-methylbutane + NaOCH₂CH₃ gives as the MAJOR product:",["2-methyl-1-butene","2-methyl-2-butene","3-methyl-1-butene","2-ethoxy-2-methylbutane"],1,"A strong base with a 3° halide gives E2. Zaitsev's rule favors the more substituted (trisubstituted) alkene."],
+ ["11","The E2 rate law is:",["Rate = k[RX]","Rate = k[Base]","Rate = k[RX][Base]","Rate = k[RX]²"],2,"E2 is concerted: the base removes H as the leaving group leaves, so both appear in the rate law."],
+ ["11","An E2 reaction runs about 7 times more slowly when the β-H's are replaced by D. This shows that:",["E2 goes through a carbocation","The C–H bond breaks in the rate-determining step","The base isn't involved","Deuterium is a better leaving group"],1,"C–D bonds are stronger and break more slowly (the deuterium isotope effect). The slowdown means the C–H bond is broken in the slow step."],
+ ["11","For an E2 reaction, the H and leaving group should be:",["Syn-periplanar","Anti-periplanar","Gauche (60°)","Either; geometry doesn't matter"],1,"Anti-periplanar alignment lets the C–H and C–X orbitals overlap to form the new π bond, and it minimizes steric strain."],
+ ["11","meso-1,2-dibromo-1,2-diphenylethane + KOH (E2) gives:",["The bromoalkene with the phenyls cis","The bromoalkene with the phenyls trans","A 1:1 mixture","Diphenylacetylene only"],0,"Putting H and Br anti in the meso isomer forces the two phenyls onto the same side. The (R,R)/(S,S) isomer gives phenyls trans."],
+ ["11","In cyclohexane rings, E2 requires the H and leaving group to be:",["cis, both equatorial","trans, both equatorial","trans-diaxial","One axial, one equatorial"],2,"Only trans-diaxial groups are anti-periplanar on a chair. An equatorial leaving group has to ring-flip to axial first."],
+ ["11","Which statement about E1 is FALSE?",["Rate = k[RX]","It goes through a carbocation","It requires a strong base","It usually gives the Zaitsev product"],2,"E1 needs no strong base, since the leaving group leaves first. A strong base favors E2."],
+ ["11","2-chloro-2-methylpropane in H₂O/ethanol at 65 °C gives 2-methyl-2-propanol (64%) and 2-methylpropene (36%). The alkene forms by:",["E2","E1","E1cB","SN2"],1,"There's no strong base and the substrate is 3°. The carbocation either is trapped (SN1) or loses a proton (E1)."],
+ ["11","The E1cB mechanism involves:",["A carbocation intermediate","A carbanion intermediate","A concerted one-step loss of H and X","A radical intermediate"],1,"The conjugate base (a carbanion, often a resonance-stabilized enolate) forms first, then the poor leaving group leaves."],
+ ["11","Which substrate is MOST likely to eliminate by E1cB?",["2-bromo-2-methylpropane","1-bromobutane","A β-hydroxy ketone (OH two carbons from C=O) with NaOH","Bromocyclohexane with H₂O"],2,"The α-H next to C=O is acidic, and OH is a poor leaving group. Your slide shows a β-hydroxy ketone + NaOH giving an enone this way."],
+ ["11","In biological substitution reactions, the leaving group is usually on a(n):",["Alkyl fluoride","Organodiphosphate","Alkyl iodide","Tosylate"],1,"Cells use diphosphate leaving groups instead of halides."],
+ ["11","CH₃CH₂CH₂CH₂Br + NaN₃ in THF → CH₃CH₂CH₂CH₂N₃ is:",["SN1","SN2","E1","E2"],1,"It's a 1° halide with a good, weakly basic nucleophile in an aprotic solvent."],
+ ["11","2-chlorobutane + KOH in ethanol → 2-butene is:",["SN2","E1","E2","E1cB"],2,"A 2° halide plus a strong base gives the Zaitsev alkene by concerted elimination."],
+ ["11","1-chloro-1-methylcyclohexane + CH₃CO₂H → 1-methylcyclohexyl acetate is:",["SN1","SN2","E2","E1cB"],0,"A 3° halide with a weak, neutral nucleophile that is also the solvent ionizes first, then is trapped."],
+ ["11","2-bromopropane + NaOCH₂CH₃ in ethanol gives mainly:",["2-ethoxypropane (SN2)","Propene (E2)","2-propanol","No reaction"],1,"With a 2° halide, a strong base favors E2 over SN2."],
+ ["11","1-bromobutane + potassium tert-butoxide (bulky, strong base) gives mainly:",["1-tert-butoxybutane","1-butene","2-butene","Butane"],1,"The bulky base can't easily reach carbon for SN2, so it removes a β-H. The only β-H's are on C2, which gives 1-butene."],
+ ["12","In EI mass spectrometry, the molecular ion is:",["A carbanion","A radical cation, M⁺•","A neutral radical","A dication"],1,"An electron is knocked out of the molecule, leaving a cation with an unpaired electron."],
+ ["12","The base peak in a mass spectrum is:",["Always the molecular ion","The tallest peak, set to 100%","The peak at lowest m/z","The M+1 peak"],1,"Other peaks are reported as a percentage of the base peak. It's often a stable fragment, not M⁺."],
+ ["12","A compound shows M⁺ at exactly 72.0939. Its formula is:",["C₄H₈O","C₅H₁₂","C₃H₄O₂","C₃H₈N₂"],1,"C₅H₁₂ = 5(12.0000) + 12(1.00783) = 72.0939. C₄H₈O is 72.0575."],
+ ["12","A mass spectrum has M⁺ at 100 (100%) and M+1 at 6.6%. The compound has about how many carbons?",["3","6","9","12"],1,"Each carbon adds about 1.1% to M+1 (¹³C): 6.6 ÷ 1.1 ≈ 6."],
+ ["12","M⁺ and M+2 peaks of nearly EQUAL height suggest the compound contains:",["Chlorine","Bromine","Nitrogen","Oxygen"],1,"⁷⁹Br and ⁸¹Br are about 50:50. Chlorine gives about 3:1."],
+ ["12","A compound with an ODD molecular ion (M⁺ = 73) most likely contains:",["An odd number of nitrogen atoms","A bromine atom","Only C, H and O","An even number of nitrogens"],0,"Nitrogen rule: an odd nominal molecular weight means an odd number of N atoms."],
+ ["12","The McLafferty rearrangement requires a carbonyl compound with:",["An α-hydrogen","A hydrogen on the carbon three atoms away from C=O (γ-H)","An aromatic ring","A halogen"],1,"The γ-H transfers to O through a six-membered arrangement, splitting off an alkene and leaving an enol radical cation."],
+ ["12","A ketone C₅H₁₀O shows strong peaks at m/z 43 and 71. It is:",["3-pentanone","2-pentanone","Pentanal","Cyclopentanol"],1,"α-cleavage of CH₃CO–CH₂CH₂CH₃ gives CH₃CO⁺ (43) and C₃H₇CO⁺ (71). 3-pentanone would give 57."],
+ ["12","Alcohols commonly show which mass spectral feature?",["M+2 = M","A peak at M − 18 from loss of H₂O","A McLafferty peak only","No fragmentation"],1,"Alcohols fragment by dehydration (M − 18) and by α-cleavage next to the C–O."],
+ ["12","Which ionization methods are used for large biomolecules (12.4)?",["Electron impact only","ESI and MALDI","IR and UV","NMR and DEPT"],1,"Electrospray and MALDI are soft methods that ionize proteins without breaking them apart. They're often paired with TOF analyzers."],
+ ["12","Which statement about electromagnetic radiation is TRUE?",["Longer wavelength means higher energy","IR is higher in energy than visible light","Energy is proportional to wavenumber (cm⁻¹)","Frequency and energy are inversely related"],2,"E = hν = hc/λ, and wavenumber = 1/λ, so energy rises with wavenumber. IR is lower in energy than visible light."],
+ ["12","A strong, broad IR band at 3350 cm⁻¹ indicates:",["C=O","O–H of an alcohol","C≡N","C=C"],1,"Alcohol O–H appears at 3400–3650 and is broadened by hydrogen bonding. N–H is sharper and weaker."],
+ ["12","Sharp IR peaks at 3300 and 2120 cm⁻¹ indicate a(n):",["Alcohol","Terminal alkyne","Ketone","Nitrile"],1,"The ≡C–H stretch is at about 3300 and the C≡C stretch at about 2100–2260."],
+ ["12","Which compound shows a C=O stretch near 1750 cm⁻¹?",["Cyclohexanone","Cyclopentanone","2-cyclohexenone","Acetone"],1,"Five-membered-ring ketones absorb near 1750. Cyclohexanone and acetone are near 1715, and conjugated ketones near 1690."],
+ ["12","Acetophenone (a ketone conjugated with a benzene ring) shows its C=O stretch near:",["1750 cm⁻¹","1735 cm⁻¹","1715 cm⁻¹","1690 cm⁻¹"],3,"Conjugation lowers the C=O frequency by about 25 cm⁻¹, from 1715 to about 1690."],
+ ["12","A saturated ester shows its C=O stretch near:",["1735 cm⁻¹","1690 cm⁻¹","1640 cm⁻¹","2250 cm⁻¹"],0,"Saturated esters absorb at about 1735, or 1715 if conjugated."],
+ ["12","How would IR tell 1-hexene from hexane?",["1-hexene has a broad 3400 band","1-hexene shows =C–H at about 3080 and C=C at about 1640","Hexane shows a 1715 peak","They can't be distinguished"],1,"Only the alkene has the vinylic C–H stretch above 3000 and the C=C stretch at 1640–1680."],
+ ["12","Which bond absorbs at the HIGHEST wavenumber?",["C–C","C=C","C≡C","C–Cl"],2,"For two heavy atoms, a stronger bond vibrates at higher frequency: triple > double > single."],
+ ["12","After hydroboration–oxidation of 1-hexene, the IR spectrum should show:",["Loss of 1640 and a new broad 3400 band","A new 1715 band","A new 2120 band","No change"],0,"The C=C (1640) is used up, and the alcohol's O–H (3400–3650) appears."],
+ ["12","The IR fingerprint region is:",["Above 3000 cm⁻¹","2000–2500 cm⁻¹","Below 1500 cm⁻¹","1650–1750 cm⁻¹"],2,"Below 1500 cm⁻¹ the many bending and stretching modes give a pattern unique to the molecule as a whole."],
+ ["13","In an applied magnetic field, the lower-energy nuclear spin state is the one aligned:",["Antiparallel to the field","Parallel to the field","Perpendicular to the field","There's no energy difference"],1,"The parallel state is slightly lower in energy and slightly more populated. Radio waves flip spins to the antiparallel state."],
+ ["13","The energy gap between nuclear spin states INCREASES when:",["The magnetic field strength increases","The sample is diluted","TMS is added","The temperature drops"],0,"ΔE is proportional to the applied field B₀. That's why stronger magnets give larger frequency separations."],
+ ["13","Chemical shifts are reported in ppm (δ) because:",["It's easier to read","δ doesn't depend on the spectrometer's field strength","ppm measures integration","It gives the coupling constant"],1,"Dividing the frequency difference by the instrument frequency makes δ the same on any spectrometer."],
+ ["13","A signal that is 'downfield' is:",["Shielded, toward δ 0","Deshielded, toward the left (higher δ)","Always an aromatic H","Due to TMS"],1,"Electronegative atoms and sp² carbons remove electron density, which deshields the nucleus and moves the signal left."],
+ ["13","¹³C NMR requires signal averaging and FT because:",["¹³C has no nuclear spin","¹³C is only about 1.1% of natural carbon","¹³C signals are too strong","CDCl₃ hides the signals"],1,"The low natural abundance makes each scan weak, so many pulses are summed and Fourier-transformed."],
+ ["13","How many signals does the ¹³C NMR spectrum of 2-butanone show?",["2","3","4","5"],2,"CH₃–CO–CH₂–CH₃: all four carbons are different."],
+ ["13","Elimination from 1-chloro-1-methylcyclohexane gives a product with 7 ¹³C signals (5 sp³ + 2 sp²). It is:",["Methylenecyclohexane","1-methylcyclohexene","Cyclohexene","Methylcyclohexane"],1,"1-methylcyclohexene has no symmetry, so all 7 carbons are different. Methylenecyclohexane is symmetric and would give only 5 signals."],
+ ["13","A ketone C=O carbon appears in the ¹³C spectrum near:",["δ 20","δ 70","δ 130","δ 208"],3,"Carbonyl carbons are far downfield at δ 160–220. Ketones are near 205–210."],
+ ["13","In a DEPT-135 spectrum, CH₂ carbons appear:",["As positive peaks","As negative peaks","Not at all","Only in DEPT-90"],1,"DEPT-135: CH₃ and CH point up, CH₂ points down, and quaternary carbons don't appear. DEPT-90 shows only CH."],
+ ["13","The two H atoms on C3 of (R)-2-butanol are:",["Homotopic","Enantiotopic","Diastereotopic","Identical in every way"],2,"Replacing each one with X gives diastereomers, because the molecule already has a chirality center. So they can give different signals."],
+ ["13","The two CH₂ hydrogens of bromoethane (CH₃CH₂Br) are:",["Homotopic","Enantiotopic, giving one signal","Diastereotopic, giving two signals","Constitutionally heterotopic"],1,"Replacing each H with X gives a pair of enantiomers. Enantiotopic H's have the same chemical shift."],
+ ["13","How many ¹H NMR signals does 2,2-dimethylbutane, (CH₃)₃CCH₂CH₃, show?",["2","3","4","5"],1,"The nine tert-butyl H's are equivalent, plus the CH₂ and the terminal CH₃: 3 signals."],
+ ["13","An H on a carbon bonded to oxygen (e.g. CH₃–O–) appears near:",["δ 0.9","δ 1.7","δ 3.3","δ 9.8"],2,"An electronegative neighbor (O, N, X) shifts H to δ 2.5–4.5."],
+ ["13","A ¹H signal at δ 9.7 most likely comes from:",["An aromatic H","An aldehyde H (CHO)","A vinylic H","An alkane CH₃"],1,"Aldehyde protons are very far downfield at about δ 9.7–10."],
+ ["13","The integrated ¹H signals of ethanol (CH₃CH₂OH) are in the ratio:",["1:1:1","3:2:1","2:2:2","6:1:1"],1,"Peak area is proportional to the number of H: CH₃ (3), CH₂ (2), OH (1)."],
+ ["13","In CH₃CH₂Br, the CH₂ signal (δ 3.42) appears as a:",["Singlet","Doublet","Triplet","Quartet"],3,"The CH₂ has 3 neighboring H on the CH₃, so 3 + 1 = 4 peaks, in a 1:3:3:1 ratio."],
+ ["13","C₃H₇Cl shows a 6H doublet at δ 1.5 and a 1H septet at δ 4.1. It is:",["1-chloropropane","2-chloropropane","Chlorocyclopropane","1-chloro-2-methylpropane"],1,"That pattern is an isopropyl group: (CH₃)₂CH–Cl. The CH is deshielded by Cl."],
+ ["13","A 9H singlet near δ 1.0 is characteristic of:",["An ethyl group","An isopropyl group","A tert-butyl group","A methoxy group"],2,"Nine equivalent H with no neighboring H on adjacent carbons gives a singlet."],
+ ["13","Which statement about spin–spin splitting is FALSE?",["Equivalent protons don't split each other","n neighbors give n + 1 peaks","Protons more than two carbons apart usually don't split each other","Coupling constants (J) change with magnet strength"],3,"J is measured in Hz and depends on the molecule, not the magnet. It's the same in both coupled signals."],
+ ["13","In trans-cinnamaldehyde (Ph–CH=CH–CHO), the vinylic H next to the CHO is split by two different neighbors. It appears as a:",["Triplet","Quartet","Doublet of doublets","Singlet"],2,"It couples to the other vinylic H (large J) and to the aldehyde H (small J). Unequal J values give a doublet of doublets, not a triplet."],
+ ["13","Hydroboration–oxidation of methylenecyclohexane gives a product with a 2H doublet at δ 3.4. It is:",["1-methylcyclohexanol","Cyclohexylmethanol","Cyclohexanone","Methylcyclohexane"],1,"A CH₂OH next to a single ring CH gives a 2H doublet at δ 3.4. 1-methylcyclohexanol would show a 3H CH₃ singlet near δ 1.2 instead."]
+];;
+const E12_SHEET=[
+ {title:"Chapter 1: bonding and hybridization",head:["Bond (molecule)","Hybridization","Angle","Length","Strength"],rows:[
+  ["C–C (ethane)","sp³","109.5°","154 pm","377 kJ/mol"],
+  ["C=C (ethylene)","sp²","120°","134 pm","728 kJ/mol"],
+  ["C≡C (acetylene)","sp","180°","120 pm","965 kJ/mol"],
+  ["C–H on sp³ / sp² / sp","—","—","109 / 108 / 106 pm","421 / 464 / 558 kJ/mol"]
+ ]},
+ {title:"Chapter 2: pKa values to know",head:["Acid","pKa","Conjugate base"],rows:[
+  ["HCl","−7.0","Cl⁻"],["HNO₃","−1.3","NO₃⁻"],["H₃PO₄","2.16","H₂PO₄⁻"],
+  ["CH₃COOH (acetic acid)","4.76","CH₃COO⁻"],["NH₄⁺","9.25","NH₃"],["Phenol","9.89","PhO⁻"],
+  ["H₂O","15.74","HO⁻"],["CH₃CH₂OH","16.00","CH₃CH₂O⁻"],["HC≡CH","25","HC≡C⁻"],["NH₃","36","NH₂⁻"],["CH₄","~60","CH₃⁻"]
+ ]},
+ {title:"Chapters 3–4: conformation and strain costs",head:["Interaction","Cost (kJ/mol)","Where it matters"],rows:[
+  ["H↔H eclipsed","4.0","Ethane barrier = 3 × 4.0 = 12"],
+  ["H↔CH₃ eclipsed","6.0","Propane barrier = 14"],
+  ["CH₃↔CH₃ eclipsed","11","Butane fully eclipsed = 19 total"],
+  ["CH₃↔CH₃ gauche","3.8","Butane gauche vs anti"],
+  ["Axial CH₃ (two 1,3-diaxial interactions)","7.6","Methylcyclohexane is 95% equatorial"],
+  ["Axial tert-butyl","22.8","Locks the ring with t-Bu equatorial"],
+  ["Ring strain: cyclopropane / cyclobutane / cyclopentane / cyclohexane","115 / 110 / 26 / 0","Angle + torsional strain"]
+ ]},
+ {title:"Chapter 4: disubstituted cyclohexanes",head:["Isomer","Possible positions","Most stable chair"],rows:[
+  ["cis-1,2","a,e ⇌ e,a","Equal energy"],["trans-1,2","e,e or a,a","e,e"],
+  ["cis-1,3","e,e or a,a","e,e"],["trans-1,3","a,e ⇌ e,a","Equal energy (bigger group equatorial)"],
+  ["cis-1,4","a,e ⇌ e,a","Equal energy (bigger group equatorial)"],["trans-1,4","e,e or a,a","e,e"]
+ ]},
+ {title:"Chapter 5: isomer relationships",head:["Relationship","Meaning","Physical properties"],rows:[
+  ["Constitutional isomers","Same formula, different connectivity","Different"],
+  ["Enantiomers","Nonsuperimposable mirror images (every center flipped)","Identical, except opposite rotation and behavior with chiral things"],
+  ["Diastereomers","Stereoisomers that aren't mirror images (some centers flipped, or cis/trans)","Different"],
+  ["Meso compound","Has chirality centers but is achiral (internal mirror plane)","Optically inactive"],
+  ["Racemic mixture","50:50 mixture of enantiomers","Rotation = 0. Separate by resolution."]
+ ]},
+ {title:"Chapter 6: reaction types and arrows",head:["Term","Meaning"],rows:[
+  ["Addition","Two reactants combine into one product (alkene + HBr)."],
+  ["Elimination","One reactant splits into two (alcohol → alkene + H₂O)."],
+  ["Substitution","Two reactants exchange parts (CH₃Cl + OH⁻ → CH₃OH + Cl⁻)."],
+  ["Rearrangement","One molecule's bonding reorganizes into an isomer."],
+  ["Homolytic / fishhook arrow","One electron moves to each atom: radical reactions."],
+  ["Heterolytic / full arrow","Both electrons go to one atom: polar reactions."],
+  ["Nucleophile → electrophile","Curved arrows start at the electron-rich site (Lewis base) and point to the electron-poor site (Lewis acid)."]
+ ]},
+ {title:"Chapter 7.1–7.7: alkenes",head:["Topic","Key rule"],rows:[
+  ["7.1 Industry","Ethylene and propylene come from steam cracking of ethane and naphtha. They're the largest-volume organic chemicals."],
+  ["7.3 Naming","Number to give the C=C the lowest number. In cycloalkenes, the double bond is C1–C2. Substituents on the ring then get the lowest numbers."],
+  ["7.4 Cis–trans","Needs two different groups on each alkene carbon. The π bond (~350 kJ/mol) blocks rotation."],
+  ["7.5 E/Z","CIP priority on each carbon. Same side is Z, opposite sides is E."],
+  ["7.6 Stability","Tetra- > tri- > di- > monosubstituted. Trans > cis (steric strain). Due to hyperconjugation and stronger sp²–sp³ bonds."],
+  ["7.6 Heats of hydrogenation","A less stable alkene releases more heat. cis-2-butene −120, trans-2-butene −116 kJ/mol."],
+  ["7.7 HX addition","Step 1 (slow): the π bond attacks H⁺ to give a carbocation. Step 2 (fast): X⁻ bonds to C⁺. Works with HCl, HBr, HI (HI made from KI + H₃PO₄)."]
+ ]}
+];;
+const E12_CARDS=[
+ ["1","Atomic number vs mass number","Z = number of protons. A = protons + neutrons. Isotopes have the same Z and different A."],
+ ["1","Ground-state configuration of carbon","1s² 2s² 2p². Four valence electrons, so carbon forms 4 bonds."],
+ ["1","Shapes of s and p orbitals","s: spherical. p: dumbbell with a nodal plane through the nucleus. Each orbital holds 2 electrons."],
+ ["1","How to find hybridization","Count σ bonds + lone pairs: 4 = sp³, 3 = sp², 2 = sp."],
+ ["1","Bond angles in CH₄, NH₃ and H₂O","109.5°, 107.3° and 104.5°. All are sp³; lone pairs squeeze the angle."],
+ ["1","What makes up a C=C double bond?","One σ bond (sp²–sp²) and one π bond (sideways p–p overlap)."],
+ ["1","What makes up a C≡C triple bond?","One σ bond (sp–sp) and two π bonds. It's the shortest and strongest C–C bond."],
+ ["1","Bonding vs antibonding MO","Bonding: lower energy, electron density between the nuclei. Antibonding: higher energy, node between the nuclei."],
+ ["1","Skeletal structures","Carbons are at line ends and vertices. H on carbon isn't drawn. Heteroatoms and their H are drawn."],
+ ["2","Electronegativity of F and C","F = 4.0 (highest). C = 2.5. A difference below 2 is polar covalent; above 2 is ionic."],
+ ["2","Inductive effect","Shifting of σ electrons toward an electronegative atom nearby."],
+ ["2","Electrostatic potential map colors","Red = electron-rich. Blue = electron-poor."],
+ ["2","Polar molecules with zero dipole moment?","None. Symmetric molecules like CO₂ and CCl₄ have polar bonds that cancel, so μ = 0."],
+ ["2","Formal charge formula","FC = V − N − B/2"],
+ ["2","Formal charges in DMSO, (CH₃)₂S=O drawn as S⁺–O⁻","S is +1 and O is −1."],
+ ["2","What moves between resonance forms?","Only π electrons and lone pairs. Atoms never move."],
+ ["2","Best resonance contributor","Full octets, the fewest formal charges, and negative charge on the more electronegative atom."],
+ ["2","Brønsted acid vs Lewis acid","Brønsted: donates H⁺. Lewis: accepts an electron pair (BF₃, AlCl₃)."],
+ ["2","How to tell which way an acid–base equilibrium lies","Toward the weaker acid (higher pKa)."],
+ ["2","pKa of acetic acid, water, ethanol and acetylene","4.76, 15.7, 16 and 25."],
+ ["2","Ka from pKa","Ka = 10^(−pKa). For pKa 4.76, Ka = 1.7 × 10⁻⁵."],
+ ["2","Strongest noncovalent attraction between alcohol molecules","Hydrogen bonding (an O–H…O interaction)."],
+ ["3","Name these alkyl groups: (CH₃)₂CH–, (CH₃)₂CHCH₂–, CH₃CH₂CH(CH₃)–, (CH₃)₃C–","Isopropyl, isobutyl, sec-butyl and tert-butyl."],
+ ["3","1°, 2°, 3° and 4° carbons","Bonded to 1, 2, 3 or 4 other carbons."],
+ ["3","How many constitutional isomers of C₅H₁₂? C₆H₁₄?","3 and 5."],
+ ["3","Alkane naming steps","1) Find the longest chain. 2) Number to give the first substituent the lowest number. 3) List substituents alphabetically (ignore di-, tri-, sec-, tert-)."],
+ ["3","Boiling point trends","Longer chain: higher bp. More branching: lower bp (less surface area, weaker dispersion forces)."],
+ ["3","Ethane: staggered vs eclipsed","Staggered is lower in energy. Eclipsed costs 12 kJ/mol of torsional strain (3 × 4.0)."],
+ ["3","Butane conformations from lowest to highest energy","Anti (0) < gauche (3.8) < eclipsed CH₃/H (16) < fully eclipsed CH₃/CH₃ (19 kJ/mol)."],
+ ["3","Torsional vs steric strain","Torsional: repulsion between eclipsing bonds. Steric: atoms forced closer than their size allows."],
+ ["4","Ring-strain energies","Cyclopropane 115, cyclobutane 110, cyclopentane 26, cyclohexane 0 kJ/mol."],
+ ["4","Three kinds of ring strain","Angle strain (Baeyer), torsional strain and steric strain."],
+ ["4","Shapes of cyclobutane and cyclopentane","Cyclobutane is puckered. Cyclopentane is an envelope. Both relieve torsional strain."],
+ ["4","Chair cyclohexane","About 111° angles and all bonds staggered, so it's strain-free. 6 axial and 6 equatorial H."],
+ ["4","What does a ring flip do?","Every axial position becomes equatorial and vice versa. Cis/trans relationships don't change."],
+ ["4","Why is equatorial methylcyclohexane favored?","Axial CH₃ has two 1,3-diaxial interactions (7.6 kJ/mol), so it's 95:5 equatorial."],
+ ["4","Which disubstituted cyclohexanes can be e,e?","trans-1,2, cis-1,3 and trans-1,4."],
+ ["4","Cis-trans isomers of cycloalkanes are what kind of isomers?","Stereoisomers (diastereomers): same connectivity, different 3-D arrangement."],
+ ["4","cis- vs trans-decalin","Two fused chairs. trans-Decalin can't ring-flip."],
+ ["5","Chirality center","An sp³ carbon with 4 different groups."],
+ ["5","Chiral vs achiral","Chiral: not superimposable on its mirror image, no plane of symmetry. Achiral: has a symmetry plane."],
+ ["5","Dextrorotatory vs levorotatory","(+) rotates clockwise. (−) rotates counterclockwise. R/S does NOT predict the sign."],
+ ["5","Specific rotation formula","[α]D = α ÷ (l in dm × c in g/mL), at 589 nm (sodium D line)."],
+ ["5","What did Pasteur discover?","Enantiomeric crystals of sodium ammonium tartrate. Their solutions rotate light equally and in opposite directions."],
+ ["5","R vs S","Point the lowest priority away. 1 → 2 → 3 clockwise is R; counterclockwise is S."],
+ ["5","Enantiomers vs diastereomers","Enantiomers: all centers inverted. Diastereomers: some centers inverted."],
+ ["5","Meso compound","Has chirality centers but an internal mirror plane, so it's achiral. Example: (2R,3S)-tartaric acid."],
+ ["5","Racemic mixture and resolution","A 50:50 mixture of enantiomers, with 0 rotation. Resolve it by forming diastereomeric salts with an enantiopure acid or base, then separating them."],
+ ["5","Why can't chiral amines (R₃N) be resolved?","Nitrogen inversion: the lone pair flips through a planar TS very quickly."],
+ ["5","Why does chirality matter in nature?","Receptors and enzymes are chiral (three-point interaction), so enantiomers can act differently as drugs."],
+ ["6","Four kinds of organic reactions","Addition, elimination, substitution and rearrangement."],
+ ["6","Fishhook (half-headed) arrow","Moves one electron: homolytic or radical steps."],
+ ["6","Steps of a radical chain reaction","Initiation, propagation and termination."],
+ ["6","Nucleophile vs electrophile","Nucleophile: electron-rich Lewis base. Electrophile: electron-poor Lewis acid."],
+ ["6","Curved-arrow rules","Arrows go from the nucleophile to the electrophile. Electrons move in pairs. Keep octets and track charges."],
+ ["6","Mechanism of HBr + ethylene","1) The π bond attacks H, giving a carbocation + Br⁻. 2) Br⁻ bonds to C⁺, giving bromoethane."],
+ ["6","Keq, ΔG° and exergonic","ΔG° = −RT ln Keq. Keq > 1 means ΔG° < 0 (exergonic, products favored)."],
+ ["6","Bond dissociation energy (D)","Energy to break a bond homolytically in the gas phase. ΔH° = bonds broken − bonds formed."],
+ ["6","Transition state vs intermediate","TS: an energy maximum that can't be isolated. Intermediate: an energy minimum between two TSs."],
+ ["6","What controls rate vs equilibrium?","ΔG‡ (activation energy) controls rate. ΔG° controls equilibrium."],
+ ["6","What do enzymes do?","Lower ΔG‡ by giving an alternative mechanism. They don't change Keq."],
+ ["7","Degree of unsaturation formula","(2C + 2 + N − H − X)/2. Ignore O."],
+ ["7","Where do ethylene and propylene come from?","Steam cracking of ethane, propane or naphtha."],
+ ["7","Naming a cycloalkene","The C=C is C1–C2, numbered so that substituents get the lowest numbers."],
+ ["7","When does an alkene have cis/trans isomers?","When each alkene carbon has two different groups."],
+ ["7","E vs Z","Rank the two groups on each carbon by CIP. Higher priorities together is Z; opposite is E."],
+ ["7","Alkene stability order","Tetrasubstituted > trisubstituted > disubstituted > monosubstituted. Trans > cis."],
+ ["7","Why are more substituted alkenes more stable?","Hyperconjugation (C–H σ to π* overlap) and stronger sp²–sp³ bonds."],
+ ["7","What does heat of hydrogenation tell you?","Less heat released means a more stable alkene. trans-2-butene (−116) is more stable than cis (−120 kJ/mol)."],
+ ["7","Electrophilic addition of HX, step 1","The π electrons attack H–X, giving a carbocation (slow, rate-determining) + X⁻."]
+];;
+const E12_Q=[
+ ["1","The ground-state electron configuration of carbon is:",["1s² 2s² 2p²","1s² 2s¹ 2p³","1s² 2p⁴","1s² 2s² 2p⁴"],0,"Carbon has 6 electrons. Fill 1s, then 2s, then put 2 in 2p."],
+ ["1","Isotopes of an element have the same:",["Mass number","Number of neutrons","Atomic number","Atomic mass"],2,"Isotopes have the same number of protons (Z) and different numbers of neutrons, so A differs."],
+ ["1","A 2p orbital has which shape?",["Spherical","Dumbbell, with a nodal plane through the nucleus","Cloverleaf","Ring-shaped"],1,"p orbitals have two lobes separated by a node at the nucleus. s orbitals are spherical."],
+ ["1","The hybridization of N in NH₃ and its H–N–H angle are:",["sp², 120°","sp³, 107.3°","sp³, 109.5°","sp, 180°"],1,"3 σ bonds + 1 lone pair = 4 electron groups, so sp³. The lone pair compresses the angle to 107.3°."],
+ ["1","The H–O–H bond angle in water is:",["180°","120°","109.5°","104.5°"],3,"O is sp³ with two lone pairs, which squeeze the angle to 104.5°."],
+ ["1","How many σ and π bonds are in propyne, CH≡C–CH₃?",["6 σ, 2 π","5 σ, 2 π","6 σ, 1 π","4 σ, 3 π"],0,"σ: 4 C–H + 2 C–C = 6. The triple bond adds 2 π."],
+ ["1","The hybridizations of the three carbons in CH₂=CH–C≡N, left to right, are:",["sp³, sp², sp","sp², sp², sp","sp², sp, sp","sp, sp², sp²"],1,"Each alkene carbon has 3 σ bonds (sp²). The nitrile carbon has 2 σ bonds (sp)."],
+ ["1","Which carbon–carbon bond is SHORTEST and STRONGEST?",["C–C in ethane","C=C in ethylene","C≡C in acetylene","C–C in benzene"],2,"Ethyne's C≡C is 120 pm and 965 kJ/mol, compared with 134 pm/728 for C=C and 154 pm/377 for C–C."],
+ ["1","A C=C double bond consists of:",["Two σ bonds","Two π bonds","One σ and one π bond","One σ and two π bonds"],2,"An sp²–sp² σ bond plus a π bond from the sideways overlap of unhybridized p orbitals."],
+ ["1","Which statement about an ANTIBONDING molecular orbital is true?",["It is lower in energy than the atomic orbitals","It has a node between the nuclei","It holds the bonding electrons in H₂","It increases electron density between the nuclei"],1,"Antibonding MOs are higher in energy, with a node between the nuclei. In H₂ both electrons are in the bonding MO."],
+ ["1","The molecular formula of cyclohexene is:",["C₆H₁₂","C₆H₁₀","C₆H₈","C₆H₁₄"],1,"A ring and a double bond each remove 2 H from C₆H₁₄: C₆H₁₀."],
+ ["2","Which bond is MOST polar?",["C–H","C–Br","C–O","C–F"],3,"F has the highest electronegativity (4.0), so it has the largest difference from C (2.5)."],
+ ["2","Which molecule has a ZERO dipole moment?",["CH₂Cl₂","H₂O","NH₃","CCl₄"],3,"The four C–Cl bond dipoles of tetrahedral CCl₄ cancel. The others have net dipoles from geometry or lone pairs."],
+ ["2","On an electrostatic potential map, red regions are:",["Electron-poor","Electron-rich","Nonpolar","Positively charged"],1,"Red means electron-rich (partial negative). Blue means electron-poor."],
+ ["2","According to your slides, a bond is considered IONIC when the electronegativity difference is:",["Less than 0.5","Between 0.5 and 1","Greater than 2","Exactly 0"],2,"An EN difference below 2 is polar covalent. Above 2 it's ionic."],
+ ["2","The formal charge on nitrogen in the ammonium ion, NH₄⁺, is:",["−1","0","+1","+2"],2,"FC = 5 − 0 − 8/2 = +1."],
+ ["2","In nitromethane, CH₃–N⁺(=O)–O⁻, the formal charge on N is:",["0","+1","−1","+2"],1,"N has 4 bonds and no lone pairs: 5 − 0 − 8/2 = +1. The single-bonded O is −1."],
+ ["2","Which statement about resonance forms is FALSE?",["They differ only in where π electrons and lone pairs are","The real molecule is a hybrid of the forms","The molecule rapidly switches between the forms","They must be valid Lewis structures"],2,"A resonance hybrid doesn't alternate. It is a single, blended structure all the time."],
+ ["2","In the acetate ion (CH₃COO⁻), the two C–O bonds are:",["One single and one double, always","Identical, between single and double","Both double","Both single"],1,"Two equivalent resonance forms spread the negative charge over both oxygens, so the bonds are equal."],
+ ["2","The most important resonance contributor has:",["Negative charge on the less electronegative atom","The most formal charges","Full octets and negative charge on the more electronegative atom","An atom with more than an octet"],2,"Prefer full octets, the fewest charges, and negative charge on the most electronegative atom."],
+ ["2","Which acid is STRONGEST?",["Ethanol (pKa 16)","Water (pKa 15.7)","Phenol (pKa 9.9)","Acetic acid (pKa 4.76)"],3,"Lower pKa means a stronger acid."],
+ ["2","Acetic acid has pKa 4.76. Its Ka is about:",["1.7 × 10⁻⁵","4.76 × 10⁻¹","1.7 × 10⁵","5.8 × 10⁻¹⁰"],0,"Ka = 10^(−4.76) ≈ 1.7 × 10⁻⁵."],
+ ["2","For HC≡CH (pKa 25) + NaOH ⇌ HC≡C⁻Na⁺ + H₂O (pKa 15.7), equilibrium lies:",["Far to the right","Far to the left","At exactly 50:50","It depends only on temperature"],1,"Equilibrium favors the weaker acid. Acetylene (25) is weaker than water (15.7), so the left side wins. That's why NaNH₂ is used instead."],
+ ["2","The conjugate base of methanol is:",["CH₃OH₂⁺","CH₃O⁻","CH₃⁻","CH₂OH⁻"],1,"Remove H⁺ from the O–H: methoxide, CH₃O⁻."],
+ ["2","Which is a Lewis acid but NOT a Brønsted acid?",["HCl","BF₃","CH₃COOH","H₂O"],1,"BF₃ has an empty p orbital that accepts an electron pair, but it has no H⁺ to donate."],
+ ["2","The strongest intermolecular force between ethanol molecules is:",["Dispersion","Dipole–dipole","Hydrogen bonding","Ionic bonding"],2,"An O–H hydrogen bonds to a lone pair on another O."],
+ ["2","The inductive effect is:",["The movement of π electrons through resonance","The shift of σ-bond electrons toward a nearby electronegative atom","The attraction between two dipoles","The breaking of a bond by light"],1,"Electronegative atoms pull σ electron density toward themselves through bonds."],
+ ["3","CH₃CH₂CHO contains which functional group?",["Ketone","Aldehyde","Carboxylic acid","Ether"],1,"–CHO (a carbonyl with an H at the chain end) is an aldehyde."],
+ ["3","CH₃COOCH₃ contains which functional group?",["Ester","Ether","Ketone","Carboxylic acid"],0,"R–CO–O–R′ is an ester (methyl acetate)."],
+ ["3","How many constitutional isomers have the formula C₆H₁₄?",["3","4","5","6"],2,"Hexane, 2-methylpentane, 3-methylpentane, 2,2-dimethylbutane and 2,3-dimethylbutane."],
+ ["3","The IUPAC name of (CH₃)₃CCH₂CH(CH₃)₂ is:",["2,4,4-trimethylpentane","2,2,4-trimethylpentane","Isooctane-2,2,4","1,1,1,3-tetramethylbutane"],1,"The longest chain is 5 carbons. Numbering from the tert-butyl end gives 2,2,4 (lower than 2,4,4)."],
+ ["3","The IUPAC name of CH₃CH₂CH(CH₂CH₃)CH₂CH₂CH₃ is:",["3-ethylhexane","4-ethylhexane","3-propylpentane","2-ethylhexane"],0,"The longest chain is 6 carbons. The ethyl is on C3 from the nearer end."],
+ ["3","The group (CH₃)₂CHCH₂– is called:",["Isopropyl","sec-Butyl","Isobutyl","tert-Butyl"],2,"Isobutyl attaches through a CH₂ next to a CH(CH₃)₂."],
+ ["3","How many QUATERNARY (4°) carbons are in 2,2,4-trimethylpentane?",["0","1","2","3"],1,"Only C2 is bonded to four carbons (C1, C3 and two methyls)."],
+ ["3","Which has the HIGHEST boiling point?",["Pentane","2-methylbutane","2,2-dimethylbutane","Hexane"],3,"Hexane is the longest and least branched, so it has the most surface contact and the strongest dispersion forces."],
+ ["3","The rotational barrier in ethane (12 kJ/mol) comes from:",["Steric strain between H atoms","Torsional strain from three eclipsed H↔H pairs","Angle strain","Hydrogen bonding"],1,"Each eclipsed H↔H pair costs 4.0 kJ/mol of torsional strain: 3 × 4.0 = 12."],
+ ["3","The LOWEST-energy conformation of butane (about C2–C3) is:",["Gauche","Anti","Fully eclipsed","Eclipsed CH₃/H"],1,"In the anti conformation the methyls are 180° apart, with no torsional or steric strain."],
+ ["3","Butane's gauche conformation is 3.8 kJ/mol above anti because of:",["Torsional strain","Steric strain between the methyl groups","Angle strain","Dipole repulsion"],1,"In the gauche form the two CH₃ groups are 60° apart and crowd each other."],
+ ["4","Which cycloalkane has the GREATEST total ring strain?",["Cyclopropane","Cyclopentane","Cyclohexane","Cycloheptane"],0,"Cyclopropane has 60° angles and fully eclipsed bonds, about 115 kJ/mol."],
+ ["4","Cyclobutane adopts a puckered shape mainly to reduce:",["Angle strain","Torsional strain","Steric strain between ring H","Dipole moment"],1,"Puckering partly relieves the eclipsing of neighboring C–H bonds, even though it slightly increases angle strain."],
+ ["4","Chair cyclohexane is essentially strain-free because:",["Its angles are 120°","Its angles are about 111° and all its bonds are staggered","It is planar","It has no axial hydrogens"],1,"The chair has near-tetrahedral angles and every C–C bond staggered."],
+ ["4","How many AXIAL hydrogens does chair cyclohexane have?",["3","6","9","12"],1,"One axial and one equatorial H per carbon: 6 axial, 6 equatorial."],
+ ["4","Methylcyclohexane exists about 95% with CH₃ equatorial because axial CH₃ has:",["Torsional strain","Two 1,3-diaxial interactions (7.6 kJ/mol)","Angle strain","Hydrogen bonding"],1,"An axial methyl is gauche to ring carbons and crowds the two axial H on the same side."],
+ ["4","Which isomer can have BOTH methyl groups equatorial?",["cis-1,2-dimethylcyclohexane","trans-1,3-dimethylcyclohexane","cis-1,4-dimethylcyclohexane","trans-1,2-dimethylcyclohexane"],3,"trans-1,2 is e,e or a,a. The other three are always one axial and one equatorial."],
+ ["4","A ring flip of a cyclohexane chair:",["Converts cis to trans","Converts axial to equatorial","Breaks a C–C bond","Converts R to S"],1,"Every axial position becomes equatorial and vice versa. Configuration and cis/trans don't change."],
+ ["4","cis- and trans-1,2-dimethylcyclopropane are:",["Constitutional isomers","Conformers","Stereoisomers (diastereomers)","Identical"],2,"Same connectivity but a different 3-D arrangement, and they can't interconvert without breaking bonds."],
+ ["4","The IUPAC name of a cyclohexane with CH₃ on one carbon and CH₂CH₃ two carbons away is:",["1-methyl-3-ethylcyclohexane","1-ethyl-3-methylcyclohexane","3-ethyl-1-methylcyclohexane","1-ethyl-5-methylcyclohexane"],1,"Both directions give 1,3. Break the tie alphabetically: ethyl gets C1."],
+ ["4","A tert-butyl group on cyclohexane:",["Prefers axial","Prefers equatorial so strongly that it locks the ring","Has no preference","Makes the ring planar"],1,"Axial t-Bu costs about 22.8 kJ/mol, so it is essentially always equatorial."],
+ ["5","Which compound is CHIRAL?",["2-propanol","3-pentanol","2-butanol","1-butanol"],2,"C2 of 2-butanol carries H, OH, CH₃ and CH₂CH₃, four different groups. 3-Pentanol has two identical ethyl groups."],
+ ["5","Which substituent has the HIGHEST CIP priority?",["–CH₂CH₃","–CH=CH₂","–C≡CH","–CH(CH₃)₂"],2,"Compare the attached atoms: C≡CH counts as (C,C,C), while vinyl and isopropyl are (C,C,H) and ethyl is (C,H,H)."],
+ ["5","Rank by CIP priority: –OH, –CHO, –CH₂OH, –H",["–OH > –CHO > –CH₂OH > –H","–CHO > –OH > –CH₂OH > –H","–CH₂OH > –CHO > –OH > –H","–OH > –CH₂OH > –CHO > –H"],0,"O beats C. Among the carbons, CHO counts as (O,O,H), which beats CH₂OH (O,H,H)."],
+ ["5","A solution (0.10 g/mL) in a 20-cm cell rotates light +1.20°. The specific rotation is:",["+0.60","+6.0","+12","+60"],1,"[α] = α/(l × c) = 1.20/(2.0 dm × 0.10 g/mL) = +6.0."],
+ ["5","If (R)-X has [α]D = +24.5, then (S)-X has [α]D =",["+24.5","0","−24.5","It can't be predicted"],2,"Enantiomers rotate light by the same amount in opposite directions."],
+ ["5","A compound with 3 chirality centers (and no meso forms) can have at most how many stereoisomers?",["3","6","8","9"],2,"2ⁿ = 2³ = 8."],
+ ["5","(2R,3R)- and (2R,3S)-2,3-dibromopentane are:",["Enantiomers","Diastereomers","Identical","Constitutional isomers"],1,"Only one center differs, so they are stereoisomers but not mirror images."],
+ ["5","(2R,3S)-tartaric acid is optically inactive because it is:",["A racemic mixture","A meso compound with an internal mirror plane","Not chiral at any carbon","A constitutional isomer"],1,"It has two chirality centers, but the halves mirror each other, so the molecule is achiral."],
+ ["5","Which pair has IDENTICAL melting points and solubilities?",["Diastereomers","Constitutional isomers","Enantiomers","cis/trans isomers"],2,"Enantiomers differ only in the direction they rotate light and in how they interact with other chiral substances."],
+ ["5","A racemic mixture is resolved by:",["Distillation","Reacting it with an enantiopure resolving agent to form separable diastereomers","Measuring its rotation","Adding more of one enantiomer"],1,"Diastereomers have different solubilities, so they can be separated. The resolving agent is then removed."],
+ ["5","Amines like CH₃N(H)CH₂CH₃ with three different groups can't be resolved into enantiomers because:",["N has no lone pair","Nitrogen rapidly inverts through a planar transition state","N is sp²","They have a mirror plane"],1,"Pyramidal inversion interconverts the two enantiomers quickly at room temperature."],
+ ["5","A dextrorotatory compound:",["Is always R","Rotates plane-polarized light clockwise (+)","Rotates light counterclockwise","Is racemic"],1,"Dextrorotatory means (+), clockwise. The direction has no fixed relationship to R or S."],
+ ["5","According to your slides, erythronolide B has how many chirality centers?",["6","8","10","12"],2,"Checking every ring carbon for four different groups gives 10 chirality centers."],
+ ["6","CH₂=CH₂ + HBr → CH₃CH₂Br is a(n):",["Substitution","Elimination","Addition","Rearrangement"],2,"Two reactants combine into one product."],
+ ["6","CH₃Cl + OH⁻ → CH₃OH + Cl⁻ is a(n):",["Addition","Substitution","Elimination","Rearrangement"],1,"OH replaces Cl, so the two reactants exchange parts."],
+ ["6","A fishhook (half-headed) curved arrow shows:",["Movement of an electron pair","Movement of a single electron","Movement of a proton","Movement of a nucleus"],1,"Fishhook arrows are for homolytic (radical) steps. Full arrowheads move electron pairs."],
+ ["6","Heterolytic bond cleavage produces:",["Two radicals","Two ions (both electrons go to one atom)","Two neutral molecules","A carbene"],1,"Unsymmetrical cleavage gives a cation and an anion. This is how polar reactions happen."],
+ ["6","Which species is an ELECTROPHILE?",["NH₃","OH⁻","CH₂=CH₂","BF₃"],3,"BF₃ is electron-poor (an empty p orbital), so it's a Lewis acid. The others are electron-rich nucleophiles."],
+ ["6","In a polar mechanism, a curved arrow should start at:",["The electrophile","A positive charge","An electron-rich site (lone pair or bond)","Any hydrogen atom"],2,"Arrows show electrons moving from the nucleophile to the electrophile."],
+ ["6","In the first step of HBr addition to ethylene:",["Br⁻ attacks the alkene","The π bond attacks H, forming a carbocation and Br⁻","A radical forms","The C–C σ bond breaks"],1,"The π bond is the nucleophile and the H of H–Br is the electrophile."],
+ ["6","Which compound gives only ONE monochlorination product on radical chlorination?",["Propane","Butane","2-methylpropane","2,2-dimethylpropane"],3,"Neopentane has 12 equivalent H atoms, so only one kind of H can be replaced."],
+ ["6","A reaction with Keq = 1 × 10³ at 25 °C has:",["ΔG° > 0, endergonic","ΔG° < 0, exergonic","ΔG° = 0","ΔH° = 0"],1,"ΔG° = −RT ln Keq. Keq > 1 gives a negative ΔG°, and products are favored."],
+ ["6","At 298 K, a reaction with Keq = 10 has ΔG° of about (R = 1.987 cal/K·mol):",["−1.36 kcal/mol","+1.36 kcal/mol","−13.6 kcal/mol","−0.59 kcal/mol"],0,"ΔG° = −(1.987 × 10⁻³)(298)(ln 10) = −1.36 kcal/mol (about −5.7 kJ/mol)."],
+ ["6","Using D(CH₃–H) 439, D(Cl–Cl) 243, D(CH₃–Cl) 351, D(H–Cl) 432 kJ/mol, ΔH° for CH₄ + Cl₂ → CH₃Cl + HCl is:",["+101 kJ/mol","−101 kJ/mol","−783 kJ/mol","+682 kJ/mol"],1,"Broken − formed = (439 + 243) − (351 + 432) = 682 − 783 = −101 kJ/mol (exothermic)."],
+ ["6","Which statement about a transition state is TRUE?",["It can be isolated","It is an energy minimum","It is the highest-energy point of a step and exists for less than one vibration","It is the same as an intermediate"],2,"Intermediates sit in energy valleys and can sometimes be detected. Transition states are peaks."],
+ ["6","The RATE of a reaction is mainly determined by:",["ΔG°","Keq","ΔG‡ (activation energy)","ΔS°"],2,"A larger activation barrier means a slower reaction. ΔG° only sets where equilibrium lies."],
+ ["6","An energy diagram for a two-step reaction has:",["One transition state and no intermediates","Two transition states and one intermediate","Two intermediates and one transition state","No transition states"],1,"Each step has its own transition state. The intermediate sits in the valley between them."],
+ ["6","Enzymes speed up biological reactions by:",["Increasing Keq","Lowering the activation energy through an alternative mechanism","Raising the temperature","Making ΔG° more negative"],1,"Catalysts change the path (ΔG‡), not the equilibrium."],
+ ["7","The degree of unsaturation of C₆H₁₀ is:",["1","2","3","4"],1,"(2×6 + 2 − 10)/2 = 2. For example, two rings, two π bonds, or one of each."],
+ ["7","The degree of unsaturation of C₅H₅N (pyridine) is:",["3","4","5","2"],1,"(2×5 + 2 + 1 − 5)/2 = 4. Add 1 for each N. Pyridine has one ring plus three π bonds."],
+ ["7","The degree of unsaturation of C₇H₉Cl is:",["2","3","4","5"],1,"(14 + 2 − 9 − 1)/2 = 3. A halogen counts like an H."],
+ ["7","The IUPAC name of CH₃CH=CHCH(CH₃)₂ is:",["2-methyl-3-pentene","4-methyl-2-pentene","2-methyl-4-pentene","4-methylpentane"],1,"Number so the C=C gets the lowest number (C2). The methyl is then on C4."],
+ ["7","The IUPAC name of CH₂=C(CH₃)CH₂CH₃ is:",["2-methyl-1-butene","3-methyl-3-butene","2-ethylpropene","2-methyl-2-butene"],0,"The longest chain containing the C=C has 4 carbons. The double bond starts at C1 and the methyl is on C2."],
+ ["7","Cyclohexene with a CH₃ on the carbon NEXT TO (not on) the double bond is named:",["1-methylcyclohexene","3-methylcyclohexene","4-methylcyclohexene","6-methylcyclohexene"],1,"The double bond is C1–C2. Numbering through it so the methyl gets the lowest number puts it on C3."],
+ ["7","Which alkene can exist as cis and trans isomers?",["1-pentene","2-methyl-2-butene","2-pentene","Methylenecyclohexane"],2,"Each alkene carbon of 2-pentene has two different groups. The others have two identical groups on one carbon."],
+ ["7","Cis and trans alkenes don't interconvert at room temperature because:",["The σ bond is too strong","Rotation would break the π bond (~350 kJ/mol)","They are constitutional isomers","sp² carbons are tetrahedral"],1,"The p orbitals must stay parallel to keep the π bond, so rotation requires breaking it."],
+ ["7","An alkene whose higher-priority groups are on OPPOSITE sides is designated:",["Z","E","cis","R"],1,"E (entgegen) means opposite. Z (zusammen) means together."],
+ ["7","Which alkene is MOST stable?",["1-butene","cis-2-butene","trans-2-butene","2,3-dimethyl-2-butene"],3,"It's tetrasubstituted, the most substituted, with the most hyperconjugation."],
+ ["7","Which releases the MOST heat on hydrogenation?",["trans-2-butene","cis-2-butene","2-methyl-2-butene","2,3-dimethyl-2-butene"],1,"A less stable alkene releases more heat. Of these, cis-2-butene is the least substituted and has cis steric strain."],
+ ["7","More substituted alkenes are more stable mainly because of:",["Hydrogen bonding","Hyperconjugation and stronger sp²–sp³ bonds","Angle strain","Larger dipole moments"],1,"Neighboring C–H σ bonds overlap with the empty π* orbital, and sp²–sp³ C–C bonds are stronger than sp³–sp³ bonds."],
+ ["7","Most ethylene and propylene for industry are produced by:",["Fermentation","Steam cracking of ethane, propane or naphtha","Dehydration of ethanol","Hydrogenation of acetylene"],1,"Thermal cracking with steam at high temperature breaks larger alkanes into small alkenes."],
+ ["7","In electrophilic addition of HBr to an alkene, the rate-determining step is:",["Br⁻ attacking the carbocation","Protonation of the π bond to form the carbocation","Dissociation of the product","Formation of a bromonium ion"],1,"Forming the carbocation (step 1) has the highest energy barrier. Halide capture is fast."]
+];;
+const NOTES=[{"ch": "7b", "html": "<div class=\"note\"><h3>7.11 Carbocation rearrangements</h3><ul><li>1,2-hydride or 1,2-alkyl (methyl) shift, moving with its electron pair.</li><li>Happens only if it makes a more stable cation (2° → 3°).</li><li>Red flag: a 2° cation next to a CH or a quaternary C.</li><li>No rearrangement with oxymercuration, hydroboration, or X₂ (no free cation).</li></ul></div>"}, {"ch": "8", "html": "<div class=\"note\"><h3>Meso vs racemic with Br₂</h3><ul><li>Anti addition to a <em>trans</em> alkene gives meso.</li><li>Anti addition to a <em>cis</em> alkene gives racemic.</li><li>Syn addition (OsO₄, epoxidation) is the reverse: cis gives meso.</li></ul></div>"}, {"ch": "9", "html": "<div class=\"note\"><h3>Acidity (9.7)</h3><ul><li>pKa: alkyne ≈ 25, alkene ≈ 44, alkane ≈ 60.</li><li>The sp carbon has 50% s character, so the anion sits close to the nucleus.</li><li>The base's conjugate acid must have pKa above 25: NaNH₂ (NH₃ ≈ 35) works, NaOH (H₂O ≈ 15.7) does not.</li></ul></div>"}, {"ch": "9", "html": "<div class=\"note\"><h3>Acetylide alkylation limits (9.8)</h3><ul><li>Only with methyl or 1° halides (Br, I).</li><li>2° and 3° halides give E2 elimination (an alkene) instead.</li><li>Each alkylation adds the halide's carbons. Count carbons first.</li></ul></div>"}, {"ch": "10a", "html": "<div class=\"note\"><h3>C–X bonds (10.2)</h3><ul><li>Length: C–F 139 &lt; C–Cl 178 &lt; C–Br 193 &lt; C–I 214 pm.</li><li>Strength: C–F 460 &gt; C–Cl 350 &gt; C–Br 294 &gt; C–I 239 kJ/mol.</li><li>Carbon is δ+ and the halogen is δ−.</li></ul></div>"}, {"ch": "10a", "html": "<div class=\"note\"><h3>Radical chlorination (10.3)</h3><ul><li>Relative reactivity per H: 3° 5.0 : 2° 3.5 : 1° 1.0.</li><li>Product % = (number of H × reactivity) ÷ total.</li><li>Steps: initiation (Cl₂ → 2 Cl•), propagation (two steps that repeat), termination (two radicals combine).</li></ul></div>"}, {"ch": "10a", "html": "<div class=\"note\"><h3>Radical stability (10.4–10.5)</h3><p>vinylic &lt; methyl &lt; 1° &lt; 2° &lt; 3° &lt; <strong>allylic</strong></p><p style=\"margin-top:6px\">The allyl radical spreads 3 electrons over 3 p orbitals. The unpaired electron sits on C1 and C3, so NBS can give two products.</p></div>"}, {"ch": "9", "html": "<div class=\"note\"><h3>Keto–enol tautomerism (9.4)</h3><ul><li>Tautomers interconvert by moving a proton and a double bond.</li><li>The keto form strongly dominates, so the enol is never the final answer.</li><li>Terminal alkyne: HgSO₄ gives a methyl ketone. BH₃ gives an aldehyde.</li></ul></div>"}, {"ch": "11", "html": "<div class=\"note\"><h3>SN2 vs SN1 at a glance</h3><ul><li><strong>SN2:</strong> one step, rate = k[RX][Nu], 100% inversion, methyl &gt; 1° &gt; 2° ≫ 3°, faster in polar aprotic solvents (DMSO, DMF, acetone, CH₃CN).</li><li><strong>SN1:</strong> two steps, rate = k[RX], racemization with slight excess inversion (ion pair), 3° &gt; 2°, allylic and benzylic work, faster in polar protic solvents, rearrangements are possible.</li></ul></div>"}, {"ch": "11", "html": "<div class=\"note\"><h3>Leaving groups (11.3)</h3><p>Relative reactivity: TosO⁻ 60,000 &gt; I⁻ 30,000 &gt; Br⁻ 10,000 &gt; Cl⁻ 200 &gt; F⁻ 1 ≫ OH⁻, NH₂⁻, RO⁻ (&lt;&lt;1).</p><p style=\"margin-top:6px\">Good leaving groups are weak bases. Alcohols, ethers, amines and alkyl fluorides don't do SN2 directly.</p></div>"}, {"ch": "11", "html": "<div class=\"note\"><h3>Nucleophiles (11.3)</h3><ul><li>A more basic nucleophile reacts faster (within the same atom).</li><li>Going down a column, nucleophilicity increases: I⁻ &gt; Br⁻ &gt; Cl⁻; HS⁻ &gt; HO⁻.</li><li>Anions beat neutral molecules: HO⁻ &gt; H₂O.</li><li>Protic solvents H-bond to the nucleophile and slow SN2.</li></ul></div>"}, {"ch": "11", "html": "<div class=\"note\"><h3>E2 geometry (11.8–11.9)</h3><ul><li>H and the leaving group must be <strong>anti-periplanar</strong>.</li><li>On cyclohexane they must be <strong>trans-diaxial</strong>. Equatorial groups can't eliminate.</li><li>Stereospecific: meso-1,2-dibromo-1,2-diphenylethane gives the alkene with the phenyls cis; (R,R)/(S,S) gives phenyls trans.</li><li>Deuterium isotope effect: C–D breaks more slowly, which proves the C–H bond breaks in the rate-determining step.</li></ul></div>"}, {"ch": "11", "html": "<div class=\"note\"><h3>E1 and E1cB (11.10)</h3><ul><li>E1: rate = k[RX], carbocation intermediate, Zaitsev, no geometry requirement, competes with SN1.</li><li>Example: 2-chloro-2-methylpropane in H₂O/ethanol gives 64% alcohol (SN1) and 36% alkene (E1).</li><li>E1cB: base removes H first, giving a resonance-stabilized carbanion, then the leaving group (often OH) leaves. This is typical of β-hydroxy carbonyls.</li><li>Biology: substrates are organodiphosphates, and E1cB is common (fatty acid synthesis).</li></ul></div>"}, {"ch": "10b", "html": "<div class=\"note\"><h3>Oxidation levels (10.9)</h3><p>Oxidation breaks C–H (or C–C) and forms C–O, C–N or C–X. Reduction does the opposite.</p><p style=\"margin-top:6px\" class=\"mono\">CH₃CH₃ &lt; CH₂=CH₂, CH₃OH, CH₃Cl &lt; HC≡CH, H₂C=O, CH₂Cl₂ &lt; HCO₂H, CHCl₃, HC≡N &lt; CO₂, CCl₄</p></div>"}, {"ch": "12", "html": "<div class=\"note\"><h3>Mass spec patterns (12.1–12.3)</h3><ul><li>M⁺• is the radical cation of the whole molecule. The base peak is the tallest peak (100%).</li><li>M+1 is about 1.1% of M per carbon (from ¹³C).</li><li>Cl: M : M+2 ≈ 3 : 1. Br: M : M+2 ≈ 1 : 1.</li><li>Odd M⁺ means an odd number of N (nitrogen rule).</li><li>Alcohols lose H₂O (M − 18) and do α-cleavage. Carbonyls do α-cleavage and the McLafferty rearrangement (needs a γ-H).</li></ul></div>"}, {"ch": "13", "html": "<div class=\"note\"><h3>NMR splitting rules (13.11)</h3><ul><li>n neighboring H on adjacent carbons give n + 1 peaks.</li><li>Doublet 1:1, triplet 1:2:1, quartet 1:3:3:1.</li><li>Equivalent protons don't split each other.</li><li>H more than two carbons apart don't split.</li><li>Coupled partners share the same J (Hz).</li></ul></div>"}, {"ch": "13", "html": "<div class=\"note\"><h3>Proton equivalence (13.8)</h3><ul><li>Replace each H with X and compare the results.</li><li>Same compound: homotopic, one signal.</li><li>Enantiomers: enantiotopic, one signal.</li><li>Diastereomers: diastereotopic, different signals (CH₂ next to a chirality center).</li><li>Different constitutional isomers: different signals.</li></ul></div>"}, {"ch": "1", "html": "<div class=\"note\"><h3>Hybridization shortcut (1.6–1.10)</h3><p>Count σ bonds + lone pairs on the atom.</p><ul><li>4 → sp³, 109.5°</li><li>3 → sp², 120°</li><li>2 → sp, 180°</li></ul><p style=\"margin-top:6px\">NH₃ is sp³ (107.3°). H₂O is sp³ (104.5°).</p></div>"}, {"ch": "2", "html": "<div class=\"note\"><h3>Formal charge (2.3)</h3><p class=\"mono\">FC = V − N − B/2</p><p style=\"margin-top:6px\">V = valence electrons, N = nonbonding electrons, B = bonding electrons. Common cases: N with 4 bonds is +1, O with 3 bonds is +1, O with 1 bond and 3 lone pairs is −1.</p></div>"}, {"ch": "2", "html": "<div class=\"note\"><h3>Resonance rules (2.4–2.6)</h3><ul><li>Only π electrons and lone pairs move. Atoms stay put.</li><li>Each form must be a valid Lewis structure.</li><li>The real structure is a hybrid, more stable than any one form.</li><li>The best contributor has full octets, the fewest formal charges, and negative charge on the more electronegative atom.</li><li>Any three-atom group with a p orbital on each atom has two resonance forms.</li></ul></div>"}, {"ch": "2", "html": "<div class=\"note\"><h3>Acid–base direction (2.7–2.9)</h3><ul><li>Lower pKa means a stronger acid. pKa = −log Ka.</li><li>Equilibrium favors the side with the weaker acid (higher pKa).</li><li>A stronger acid has a weaker conjugate base.</li><li>Lewis acids accept an electron pair (BF₃, AlCl₃, H⁺). Lewis bases donate one.</li></ul></div>"}, {"ch": "7a", "html": "<div class=\"note\"><h3>Degree of unsaturation (7.2)</h3><p class=\"mono\">DoU = (2C + 2 + N − H − X) / 2</p><p style=\"margin-top:6px\">Ignore O. Each ring or π bond counts 1. A triple bond counts 2.</p></div>"}, {"ch": "5", "html": "<div class=\"note\"><h3>Specific rotation (5.3)</h3><p class=\"mono\">[α]D = α / (l × c)</p><p style=\"margin-top:6px\">l is in dm and c is in g/mL. An enantiomer has the same magnitude with the opposite sign. A racemic mixture shows 0°.</p></div>"}, {"ch": "5", "html": "<div class=\"note\"><h3>CIP priority (5.5, 7.5)</h3><ul><li>Rule 1: higher atomic number wins.</li><li>Rule 2: on a tie, compare the next atoms out, at the first point of difference.</li><li>Rule 3: a multiple bond counts as duplicate single bonds.</li><li>With the lowest priority pointing back: clockwise is R, counterclockwise is S.</li><li>Alkenes: high priorities on the same side is Z, on opposite sides is E.</li></ul></div>"}, {"ch": "5", "html": "<div class=\"note\"><h3>Stereoisomer counting (5.6–5.7)</h3><ul><li>The maximum is 2ⁿ for n chirality centers.</li><li>Meso compounds lower the count (tartaric acid has 3, not 4).</li><li>Flip every center to get the enantiomer. Flip only some to get a diastereomer.</li></ul></div>"}, {"ch": "6", "html": "<div class=\"note\"><h3>Thermodynamics (6.7–6.10)</h3><ul><li>ΔG° = −RT ln Keq. Keq &gt; 1 means ΔG° &lt; 0 (exergonic).</li><li>ΔG° = ΔH° − TΔS°.</li><li>ΔH from bond energies: broken − formed.</li><li>ΔG‡ (activation energy) sets the rate. ΔG° sets the equilibrium.</li><li>A transition state is a maximum and can't be isolated. An intermediate sits in a valley.</li></ul></div>"}];
+const EXTRA=[{"ch": "11", "html": "<h3 class=\"tt\">How to pick SN1, SN2, E1 or E2 (11.12)</h3>\n  <div class=\"tbl\"><table><thead><tr><th>Substrate</th><th>Weak base, good Nu (I⁻, Br⁻, CN⁻, N₃⁻, RS⁻)</th><th>Strong base (OH⁻, RO⁻, NH₂⁻)</th><th>Neutral, weak Nu (H₂O, ROH, RCO₂H)</th></tr></thead><tbody>\n    <tr><td><strong>Methyl</strong></td><td>SN2</td><td>SN2</td><td>no reaction</td></tr>\n    <tr><td><strong>1°</strong></td><td>SN2</td><td>SN2 (a bulky base like t-BuO⁻ gives E2)</td><td>no reaction (except allylic/benzylic, which can do SN1)</td></tr>\n    <tr><td><strong>2°</strong></td><td>SN2, best in a polar aprotic solvent</td><td>E2</td><td>slow SN1 / E1</td></tr>\n    <tr><td><strong>3°</strong></td><td>SN1 / E1 (never SN2)</td><td>E2 (Zaitsev)</td><td>SN1 + E1</td></tr>\n    <tr><td><strong>OH or poor LG β to C=O</strong></td><td colspan=\"3\">E1cB, through a carbanion (enolate) intermediate</td></tr>\n  </tbody></table></div>\n\n  "}];
+const NEW_SHEET=[
+ {ch:"7b",title:"7.8–7.10: orientation, carbocations, Hammond",head:["§","Topic","Key rule"],rows:[
+  ["7.8","Markovnikov's rule","In HX addition, H goes to the alkene carbon that already has more H, and X goes to the more substituted carbon. Restated: the more substituted carbocation forms."],
+  ["7.8","Regioselectivity","One constitutional isomer forms where two are possible. If both alkene carbons are equally substituted (e.g. 2-pentene), you get a mixture."],
+  ["7.9","Carbocation structure","sp², trigonal planar, 6 valence electrons, empty p orbital perpendicular to the plane."],
+  ["7.9","Carbocation stability","3° > 2° > 1° > methyl, from inductive donation and hyperconjugation by alkyl groups. R–X dissociates most easily for 3°."],
+  ["7.10","Hammond postulate","A transition state resembles the nearest stable species. Endergonic steps have product-like TSs, and exergonic steps have reactant-like TSs."],
+  ["7.10","Why the stable cation forms faster","Protonation is endergonic, so its TS looks like the carbocation. Whatever stabilizes the cation also lowers ΔG‡."],
+  ["7.11","Rearrangements","1,2-H or 1,2-alkyl shifts turn a less stable cation into a more stable one. This is evidence for the carbocation mechanism."]
+ ]}
+];
+const NEW_NOTES=[
+ {ch:"7b",html:'<div class="note"><h3>Predicting the HX product (7.8)</h3><ul><li>Find the C=C.</li><li>Try H on each alkene carbon and judge the cation left on the other carbon: 1°, 2° or 3°?</li><li>Choose the more substituted cation and put X there.</li><li>Then check whether a 1,2-shift would make it better.</li></ul></div>'},
+ {ch:"7b",html:'<div class="note"><h3>Carbocation stability (7.9)</h3><p>3° &gt; 2° &gt; 1° &gt; methyl</p><ul><li>Inductive effect: alkyl groups push σ electron density toward C⁺.</li><li>Hyperconjugation: neighboring C–H bonds overlap with the empty p orbital. The tert-butyl cation has 9 such bonds.</li></ul></div>'},
+ {ch:"1",html:'<div class="note"><h3>Valence and bonding theory (1.4–1.5)</h3><ul><li>Usual bonds: C 4, N 3, O 2, H and halogens 1.</li><li>van\'t Hoff and Le Bel proposed the tetrahedral carbon. Lewis proposed the shared-pair bond and the octet.</li><li>Valence bond theory: a bond forms when two half-filled orbitals overlap. H–H is 74 pm and 436 kJ/mol.</li></ul></div>'},
+ {ch:"4",html:'<div class="note"><h3>Polycyclic rings (4.9)</h3><ul><li>Decalin is two fused cyclohexane chairs (cis or trans).</li><li>trans-Decalin is locked and can\'t ring-flip.</li><li>Steroids have three six-membered rings and one five-membered ring fused together, mostly trans.</li></ul></div>'},
+ {ch:"5",html:'<div class="note"><h3>Prochirality (5.11)</h3><ul><li>A prochiral sp³ carbon has two identical groups. Replacing one of them makes a chirality center.</li><li>The two H of a CH₂ are pro-R and pro-S.</li><li>The faces of a trigonal C=O or C=C are Re (clockwise) and Si (counterclockwise).</li></ul></div>'}
+];
+const NEW_CARDS=[
+ ["7b","Markovnikov's rule (original wording)","In HX addition, H attaches to the carbon with more H, and X attaches to the carbon with more alkyl groups."],
+ ["7b","Markovnikov's rule (modern wording)","The more highly substituted (more stable) carbocation forms as the intermediate."],
+ ["7b","What does regioselective mean?","One orientation of addition is preferred, so one constitutional isomer forms where two are possible."],
+ ["7b","Carbocation structure","sp², trigonal planar, 6 electrons, one empty p orbital."],
+ ["7b","Carbocation stability order and why","3° > 2° > 1° > methyl. Alkyl groups donate electrons by induction and hyperconjugation, which spreads out the + charge."],
+ ["7b","The Hammond postulate","A TS resembles the nearest stable species. Endergonic steps have product-like TSs, and exergonic steps have reactant-like TSs."],
+ ["7b","Why does the more stable carbocation form faster?","Protonation is endergonic, so the TS resembles the carbocation. A more stable cation means a lower TS and a smaller ΔG‡."],
+ ["7b","HBr + 2-methylpropene","2-bromo-2-methylpropane, through the 3° tert-butyl cation."],
+ ["1","How many bonds do C, N, O and H usually form?","4, 3, 2 and 1."],
+ ["1","Valence bond theory","A covalent bond forms when half-filled orbitals overlap. H–H: 74 pm, 436 kJ/mol."],
+ ["1","C–C bond in ethane","sp³–sp³ σ overlap, 154 pm, 377 kJ/mol. Rotation is free."],
+ ["1","Hybridization of O in methanol and P in phosphates","Both are sp³. The C–O–H angle is 108.5°."],
+ ["2","How many resonance forms does the 2,4-pentanedione anion have?","Three. The negative charge spreads over the central carbon and both oxygens."],
+ ["2","Why are carboxylic acids more acidic than alcohols?","The carboxylate anion is resonance-stabilized over two oxygens. Alkoxides aren't."],
+ ["2","Common organic bases","Amines (the lone pair on N), and O compounds like alcohols, ethers and ketones, which can be protonated."],
+ ["3","Complete combustion of an alkane","CₙH₂ₙ₊₂ + O₂ → CO₂ + H₂O. Alkanes are otherwise fairly unreactive (\"paraffins\")."],
+ ["4","Bonds in cyclopropane","Bent (\"banana\") bonds with poor overlap. They're weaker and more reactive than normal C–C bonds."],
+ ["4","Steroid ring system","Three six-membered rings + one five-membered ring, fused."],
+ ["5","Prochiral carbon","A carbon with two identical groups that becomes a chirality center when one of them is replaced."],
+ ["5","Constitutional isomers vs stereoisomers (5.9)","Constitutional: different connectivity (butane vs isobutane). Stereoisomers: same connectivity, different 3-D arrangement."],
+ ["6","Polarizability","How easily the electron cloud distorts. It increases down a group: I > Br > Cl > F."]
+];
+const NEW_Q=[
+ ["7b","What is the major product when 2-methyl-2-butene reacts with HBr?",["1-bromo-2-methylbutane","2-bromo-3-methylbutane","2-bromo-2-methylbutane","1-bromo-3-methylbutane"],2,"H⁺ adds to C3 (the CH end), giving a 3° carbocation at C2. Br⁻ bonds there, giving the Markovnikov product."],
+ ["7b","What is the major product of 1-methylcyclohexene + HBr?",["1-bromo-2-methylcyclohexane","1-bromo-1-methylcyclohexane","Bromocyclohexane","(Bromomethyl)cyclohexane"],1,"Protonating C2 leaves the positive charge on C1, which carries the methyl group (3°). Br adds there."],
+ ["7b","Which reaction is NOT regioselective (gives a roughly equal mixture of constitutional isomers)?",["Propene + HCl","2-methylpropene + HCl","1-methylcyclohexene + HCl","trans-2-pentene + HCl"],3,"Protonating either carbon of 2-pentene gives a 2° carbocation, so 2-chloro- and 3-chloropentane both form."],
+ ["7b","Which step is rate-determining in electrophilic addition of HX to an alkene?",["Attack of the π bond on H⁺ to form a carbocation","Attack of X⁻ on the carbocation","Dissociation of HX before reaction","Loss of H⁺ from the carbocation"],0,"Protonation (forming the carbocation) is slow and endergonic. Halide capture is fast."],
+ ["7b","In the first step of HBr addition, the alkene acts as a(n):",["Electrophile","Nucleophile (Lewis base)","Leaving group","Lewis acid"],1,"The electron-rich π bond donates its electron pair to the electrophilic H of HBr."],
+ ["7b","Which describes the positively charged carbon of a carbocation?",["sp³, tetrahedral, lone pair in one orbital","sp, linear, two empty p orbitals","sp², trigonal planar, one empty p orbital","sp², trigonal planar, p orbital holding two electrons"],2,"C⁺ has three σ bonds (6 electrons) in sp² orbitals about 120° apart. The unhybridized p orbital is empty."],
+ ["7b","Rank from MOST to LEAST stable: I CH₃⁺, II (CH₃)₃C⁺, III CH₃CH₂⁺, IV (CH₃)₂CH⁺",["I > III > IV > II","II > IV > III > I","IV > II > III > I","II > III > IV > I"],1,"3° > 2° > 1° > methyl. More alkyl groups donate more electron density."],
+ ["7b","Alkyl groups stabilize a carbocation mainly by:",["Withdrawing electron density from C⁺","Filling the empty p orbital with a lone pair","Donating electron density by induction and hyperconjugation","Increasing steric strain around C⁺"],2,"σ-donation (induction) and C–H/empty-p overlap (hyperconjugation) both spread out the + charge."],
+ ["7b","How many C–H bonds in the tert-butyl cation can stabilize it by hyperconjugation?",["3","6","0","9"],3,"Three CH₃ groups next to C⁺ × 3 C–H bonds each = 9."],
+ ["7b","Which alkyl chloride has the SMALLEST enthalpy of heterolytic dissociation (R–Cl → R⁺ + Cl⁻)?",["(CH₃)₃C–Cl","CH₃–Cl","CH₃CH₂–Cl","(CH₃)₂CH–Cl"],0,"tert-Butyl chloride forms the most stable (3°) cation, so it takes the least energy to ionize."],
+ ["7b","According to the Hammond postulate, the transition state of an ENDERGONIC step:",["Resembles the reactants","Resembles the products","Is exactly midway between reactants and products","Has no relation to either"],1,"A TS resembles the nearest stable species, which for an uphill step is the product."],
+ ["7b","Why does a 3° carbocation form FASTER than a 1° carbocation during HX addition?",["The 3° cation forms in an exergonic step","K controls rate, and the 3° pathway has a larger K","Protonation is endergonic, so the TS resembles the cation. A more stable cation means a lower TS and a smaller ΔG‡","Tertiary alkenes collide with HX more often"],2,"By the Hammond postulate, the factors that stabilize the cation also stabilize the cation-like TS."],
+ ["7b","What is the MAJOR product of 3-methyl-1-butene + HCl?",["2-chloro-3-methylbutane","1-chloro-3-methylbutane","2-chloro-2-methylbutane","1-chloro-2-methylbutane"],2,"Protonation gives a 2° cation at C2. A 1,2-hydride shift from C3 gives a 3° cation, which Cl⁻ traps."],
+ ["7b","Which statement about 1,2-shifts in carbocations is TRUE?",["The group moves with its bonding pair to the adjacent C⁺, usually making a more stable cation","The group moves as a radical","Shifts occur only in 3° cations","Shifts convert 3° cations into 1° cations"],0,"H:⁻ or R:⁻ moves to the neighboring C⁺. The driving force is a more stable carbocation (2° → 3°)."],
+ ["1","How many covalent bonds does nitrogen normally form in a neutral molecule?",["1","2","3","4"],2,"N has 5 valence electrons. It shares 3 to complete its octet and keeps one lone pair."],
+ ["1","In valence bond theory, a covalent bond forms when:",["Two filled orbitals overlap","Two half-filled orbitals overlap and the electrons pair up","An electron is completely transferred","Two nuclei share a proton"],1,"Overlap of two singly occupied orbitals gives a shared electron pair. For H₂, that's 74 pm and 436 kJ/mol."],
+ ["1","The C–C σ bond in ethane forms by overlap of:",["sp²–sp²","sp³–sp³","p–p sideways","s–s"],1,"Each carbon is sp³. The cylindrically symmetric σ bond allows free rotation."],
+ ["1","The oxygen in methanol (CH₃OH) is:",["sp, 180°","sp², 120°","sp³, C–O–H angle about 108.5°","Unhybridized"],2,"O has 2 σ bonds and 2 lone pairs = 4 groups, so sp³."],
+ ["2","How many resonance forms can be drawn for the anion of 2,4-pentanedione?",["1","2","3","4"],2,"The negative charge on the central carbon is shared with both neighboring C=O oxygens: three forms."],
+ ["2","In the enolate anion of acetone, the negative charge is delocalized between:",["Two carbons","Carbon and oxygen","Two oxygens","Carbon and hydrogen"],1,"The two resonance forms put the charge on the α-carbon and on the oxygen. The O form contributes more."],
+ ["2","Carboxylic acids (pKa ≈ 5) are much more acidic than alcohols (pKa ≈ 16) because:",["O–H bonds in acids are longer","The carboxylate anion is resonance-stabilized over two oxygens","Alcohols have no lone pairs","Carboxylic acids are Lewis acids"],1,"Delocalizing the negative charge over two O atoms stabilizes the conjugate base, which strengthens the acid."],
+ ["2","Which compound is the STRONGEST base?",["CH₃COOH","H₂O","CH₃OH","CH₃NH₂"],3,"Amines use the lone pair on N, which is less electronegative than O and holds the pair less tightly."],
+ ["3","Complete combustion of propane gives:",["CO + H₂","CO₂ + H₂O","CH₄ + C₂H₆","Propene + H₂"],1,"Alkanes burn in O₂ to give CO₂ and H₂O. Otherwise they're fairly unreactive."],
+ ["4","The C–C bonds in cyclopropane are best described as:",["Normal sp³ σ bonds with 109.5° angles","Bent (\"banana\") bonds with poor overlap, which makes them weaker","π bonds","Ionic bonds"],1,"The 60° ring angle forces the orbitals to overlap at an angle, so the bonds are bent and weakened."],
+ ["4","A steroid ring system contains:",["Four six-membered rings","Three six-membered rings and one five-membered ring, fused","Two cyclohexanes joined by a chain","Four five-membered rings"],1,"Steroids have four fused rings, A, B, C (6-membered) and D (5-membered), usually trans-fused."],
+ ["5","Pasteur's experiments with sodium ammonium tartrate showed that:",["All tartrates are achiral","Mirror-image crystals give solutions with equal and opposite optical rotations","Optical rotation depends on concentration only","Meso compounds rotate light"],1,"He separated left- and right-handed crystals by hand. Their solutions rotated light equally in opposite directions: enantiomers."],
+ ["5","Butane and 2-methylpropane are:",["Enantiomers","Diastereomers","Constitutional isomers","Conformers"],2,"Same formula (C₄H₁₀) with different connectivity."],
+ ["5","A carbon that becomes a chirality center when one of its two identical groups is replaced is:",["Achiral and meso","Prochiral","Racemic","Diastereotopic"],1,"For example, the CH₂ of ethanol is prochiral. Its two H are pro-R and pro-S."],
+ ["5","Enantiomers of a drug can have different biological effects because:",["They have different molecular formulas","Receptors and enzymes are chiral and recognize 3-D shape","One enantiomer is always toxic","Enantiomers have different boiling points"],1,"Biological recognition works like a three-point fit, so only one enantiomer may fit a chiral site."],
+ ["6","Which halogen is the MOST polarizable?",["F","Cl","Br","I"],3,"Polarizability increases down a group: large, loosely held electron clouds distort easily."]
+];
+
+const CHAPTERS=[
+ {k:"1",short:"Ch 1 bonding",name:"Chapter 1 · Structure and bonding",secs:"1.1–1.12",exam:1},
+ {k:"2",short:"Ch 2 polarity, resonance, acids",name:"Chapter 2 · Polar covalent bonds; acids and bases",secs:"2.1–2.12",exam:1},
+ {k:"3",short:"Ch 3 alkanes",name:"Chapter 3 · Organic compounds: alkanes and their stereochemistry",secs:"3.1–3.7",exam:1},
+ {k:"4",short:"Ch 4 cycloalkanes",name:"Chapter 4 · Cycloalkanes and their stereochemistry",secs:"4.1–4.9",exam:1},
+ {k:"5",short:"Ch 5 stereochemistry",name:"Chapter 5 · Stereochemistry at tetrahedral centers",secs:"5.1–5.12",exam:2},
+ {k:"6",short:"Ch 6 reactions",name:"Chapter 6 · Overview of organic reactions",secs:"6.1–6.11",exam:2},
+ {k:"7a",short:"7.1–7.7 alkenes",name:"Chapter 7.1–7.7 · Alkenes: structure and stability",secs:"7.1–7.7",exam:2},
+ {k:"7b",short:"7.8–7.11 Markovnikov, carbocations",name:"Chapter 7.8–7.11 · Orientation, carbocations, Hammond, rearrangements",secs:"7.8–7.11",exam:3},
+ {k:"8",short:"Ch 8 alkene reactions",name:"Chapter 8 · Alkenes: reactions and synthesis",secs:"8.1–8.11",exam:3},
+ {k:"9",short:"Ch 9 alkynes",name:"Chapter 9 · Alkynes: an introduction to synthesis",secs:"9.1–9.9",exam:3},
+ {k:"10a",short:"10.1–10.5 organohalides",name:"Chapter 10.1–10.5 · Organohalides: structure and radical halogenation",secs:"10.1–10.5",exam:3},
+ {k:"10b",short:"10.6–10.9 Grignard, Gilman, redox",name:"Chapter 10.6–10.9 · Alcohols → RX, organometallics, oxidation levels",secs:"10.6–10.9",exam:4},
+ {k:"11",short:"Ch 11 SN1 · SN2 · E1 · E2",name:"Chapter 11 · Substitutions and eliminations",secs:"11.1–11.12",exam:4},
+ {k:"12",short:"Ch 12 mass spec · IR",name:"Chapter 12 · Mass spectrometry and IR",secs:"12.1–12.8",exam:4},
+ {k:"13",short:"Ch 13 NMR",name:"Chapter 13 · NMR spectroscopy",secs:"13.1–13.13",exam:4}
+];
+const CH=Object.fromEntries(CHAPTERS.map(c=>[c.k,c]));
+const order=k=>CHAPTERS.findIndex(c=>c.k===k);
+
+/* map each source's tags to chapter keys */
+const mapE3=t=>String(t).startsWith('7')?'7b':(String(t).startsWith('10')?'10a':String(t));
+const mapE4=t=>t==='10'?'10b':t;
+const mapE12=t=>t==='7'?'7a':t;
+
+/* seeded option shuffles, identical to the original pages so answer letters are unchanged */
+function shuffleQ(arr,seed,fix){let s=seed;const r=()=>(s=(s*1103515245+12345)%2147483648)/2147483648;
+  arr.forEach(q=>{const idx=[0,1,2,3];for(let i=3;i>0;i--){const j=Math.floor(r()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+    const opts=idx.map(k=>q[2][k]);q[3]=idx.indexOf(q[3]);q[2]=opts;if(fix)fix(q,idx)})}
+shuffleQ(E3_Q,20261102,(q,idx)=>{q[4]=q[4].replace(/\b([ABCD]) and ([ABCD]) are propagation, and ([ABCD]) is termination/,()=>{const L=t=>'ABCD'[idx.indexOf(t)];return `${L(1)} and ${L(0)} are propagation, and ${L(3)} is termination`})});
+shuffleQ(E4_Q,20261130);
+shuffleQ(E12_Q,20261209);
+shuffleQ(NEW_Q,20261210);
+
+const tagQ=(arr,map,src)=>arr.map(q=>({ch:map(q[0]),text:q[1],opts:q[2],ans:q[3],expl:q[4],src}));
+let Q=[...tagQ(E12_Q,mapE12,'ch1-7'),...tagQ(NEW_Q,t=>t,'new'),...tagQ(E3_Q,mapE3,'exam3'),...tagQ(E4_Q,mapE4,'exam4')];
+Q=Q.map((q,i)=>({...q,_o:i})).sort((a,b)=>order(a.ch)-order(b.ch)||a._o-b._o).map((q,i)=>({...q,id:i}));
+const tagC=(arr,map)=>arr.map(c=>({ch:map(c[0]),front:c[1],back:c[2]}));
+let CARDS=[...tagC(E12_CARDS,mapE12),...tagC(NEW_CARDS,t=>t),...tagC(E3_CARDS,mapE3),...tagC(E4_CARDS,mapE4)];
+CARDS=CARDS.map((c,i)=>({...c,_o:i})).sort((a,b)=>order(a.ch)-order(b.ch)||a._o-b._o);
+
+/* study sheet blocks per chapter */
+const chipFor={mk:'<span class="chip c-mk">Markovnikov</span>',amk:'<span class="chip c-amk">anti-Markovnikov</span>',syn:'<span class="chip c-syn">syn</span>',anti:'<span class="chip c-anti">anti</span>',none:'<span class="chip c-none">n/a</span>'};
+const BLOCKS={};CHAPTERS.forEach(c=>BLOCKS[c.k]=[]);
+const add=(k,html)=>{(BLOCKS[k]||(BLOCKS[k]=[])).push(html)};
+function headTable(g){return `<h3 class="tt">${g.title}</h3><div class="tbl"><table><thead><tr>${g.head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${g.rows.map(r=>`<tr>${r.map((c,k)=>g.head[0]==='§'?(k===0?`<td class="sec">${c}</td>`:k===1?`<td><strong>${c}</strong></td>`:`<td>${c}</td>`):(k===0?`<td><strong>${c}</strong></td>`:`<td>${c}</td>`)).join('')}</tr>`).join('')}</tbody></table></div>`}
+const e12map=t=>t.startsWith('Chapter 1:')?['1']:t.startsWith('Chapter 2')?['2']:t.startsWith('Chapters 3–4')?['3','4']:t.startsWith('Chapter 4')?['4']:t.startsWith('Chapter 5')?['5']:t.startsWith('Chapter 6')?['6']:['7a'];
+E12_SHEET.forEach(g=>e12map(g.title).forEach(k=>add(k,headTable(g))));
+NEW_SHEET.forEach(g=>add(g.ch,headTable(g)));
+/* Exam 3 reaction rows split by section number */
+const rxnRows={};
+E3_SHEET.forEach(g=>g.rows.forEach(r=>{const k=mapE3(r[0].split('.')[0]==='7'?'7':r[0].split('.')[0]);(rxnRows[k]=rxnRows[k]||[]).push(r)}));
+const legend='<div class="legend"><span class="chip c-mk">Markovnikov</span><span class="chip c-amk">anti-Markovnikov</span><span class="chip c-syn">syn</span><span class="chip c-anti">anti</span><span class="chip c-none">n/a</span></div>';
+Object.entries(rxnRows).forEach(([k,rows])=>add(k,`<h3 class="tt">Reactions</h3>${legend}<div class="tbl"><table><thead><tr><th>§</th><th>Reaction</th><th>Reagents</th><th>Regio</th><th>Stereo</th><th>Outcome</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="sec">${r[0]}</td><td><strong>${r[1]}</strong></td><td class="rg">${r[2]}</td><td>${chipFor[r[3]]}</td><td>${chipFor[r[4]]}</td><td>${r[5]}</td></tr>`).join('')}</tbody></table></div>`));
+const e4map=t=>t.startsWith('10.6')?'10b':t.startsWith('Chapter 11')?'11':t.startsWith('Chapter 12')?'12':'13';
+E4_SHEET.forEach(g=>add(e4map(g.title),headTable(g)));
+EXTRA.forEach(x=>add(x.ch,x.html));
+const NOTES_BY={};[...NOTES,...NEW_NOTES].forEach(n=>(NOTES_BY[n.ch]=NOTES_BY[n.ch]||[]).push(n.html));
+
+const $=s=>document.querySelector(s);
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const qCount=k=>Q.filter(q=>q.ch===k).length, cCount=k=>CARDS.filter(c=>c.ch===k).length;
+
+/* chapter chip nav */
+const EXAMS=[[1,"Exam 1"],[2,"Exam 2"],[3,"Exam 3"],[4,"Exam 4"]];
+$('#chapnav').innerHTML=`<div class="navrow"><span class="navlbl">Final</span><a class="cl" data-ch="all" href="#sheet">All chapters</a></div>`+EXAMS.map(([n,l])=>`<div class="navrow"><span class="navlbl">${l}</span>${CHAPTERS.filter(c=>c.exam===n).map(c=>`<a class="cl" data-ch="${c.k}" href="#ch${c.k}">${c.short}</a>`).join('')}</div>`).join('');
+
+/* render sheet once */
+$('#sheet-body').innerHTML=CHAPTERS.map(c=>`<section class="chap" id="sec-${c.k}" data-ch="${c.k}">
+  <div class="chap-head"><div><div class="eyebrow">Sections ${c.secs} · Exam ${c.exam}</div><h2>${c.name}</h2></div>
+  <div class="chap-links"><a href="#ch${c.k}-cards">${cCount(c.k)} flashcards →</a><a href="#ch${c.k}-exam">${qCount(c.k)} questions →</a></div></div>
+  ${(BLOCKS[c.k]||[]).join('')}
+  ${NOTES_BY[c.k]?`<div class="notes">${NOTES_BY[c.k].join('')}</div>`:''}
+</section>`).join('');
+
+/* selects */
+function fillSelect(sel,mock){sel.innerHTML=`<option value="all">All chapters</option>`+(mock?`<option value="mock">Mock final · 50 random questions</option>`:'')+CHAPTERS.map(c=>`<option value="${c.k}">${c.short}</option>`).join('')}
+const cf=$('#card-filter'),ef=$('#exam-filter');fillSelect(cf);fillSelect(ef,true);
+
+/* routing: #sheet #cards #exam #ch5 #ch5-cards #ch5-exam #mock-exam */
+let cur={ch:'all',view:'sheet'};
+function parse(){const h=location.hash.slice(1);let m=h.match(/^(?:ch(\w+?))?(?:-?(sheet|cards|exam))?$/);let ch='all',view='sheet';
+  if(h==='mock-exam'){return {ch:'mock',view:'exam'}}
+  if(m){if(m[1]&&CH[m[1]])ch=m[1];if(m[2])view=m[2]}return {ch,view}}
+const hashFor=(ch,view)=>ch==='mock'?(view==='exam'?'#mock-exam':'#'+view):ch==='all'?'#'+view:(view==='sheet'?`#ch${ch}`:`#ch${ch}-${view}`);
+function route(){const prev=cur;cur=parse();
+  ['sheet','cards','exam'].forEach(n=>{$('#v-'+n).hidden=n!==cur.view;const a=$(`nav.tabs a[data-view="${n}"]`);a.href=hashFor(cur.ch==='mock'&&n!=='exam'?'all':cur.ch,n);if(n===cur.view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.querySelectorAll('#chapnav .cl').forEach(a=>{const on=a.dataset.ch===cur.ch||(cur.ch==='mock'&&a.dataset.ch==='all');a.classList.toggle('on',on);a.href=hashFor(a.dataset.ch,cur.view)});
+  document.querySelectorAll('#sheet-body .chap').forEach(s=>s.hidden=!(cur.ch==='all'||cur.ch==='mock'||s.dataset.ch===cur.ch));
+  $('#sheet-all-note').hidden=!(cur.ch==='all'||cur.ch==='mock');
+  const cw=cur.ch==='mock'?'all':cur.ch;if(deckFor!==cw){cf.value=cw;buildDeck(false)}
+  if(examFor!==cur.ch){ef.value=cur.ch;renderExam()}
+  if(prev.ch!==cur.ch||prev.view!==cur.view){const t=$('#chapnav');if(window.scrollY>t.offsetTop+t.offsetHeight)window.scrollTo({top:t.offsetTop-8})}}
+window.addEventListener('hashchange',route);
+
+/* flashcards */
+let deck=[],ci=0,deckFor=null,examFor=null;
+function buildDeck(shuffle){const f=cf.value;deckFor=f;deck=CARDS.filter(c=>f==='all'||c.ch===f);
+  if(shuffle){for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]]}}ci=0;renderCard()}
+function renderCard(){const c=deck[ci];if(!c)return;$('#fcard').classList.remove('flipped');
+  $('#f-tag').textContent=CH[c.ch].short;$('#b-tag').textContent=CH[c.ch].short+' · answer';
+  $('#f-q').textContent=c.front;$('#b-a').textContent=c.back;
+  $('#card-count').textContent=`Card ${ci+1} of ${deck.length}`;
+  $('#card-prev').disabled=ci===0;$('#card-next').disabled=ci===deck.length-1}
+$('#fcard').addEventListener('click',()=>$('#fcard').classList.toggle('flipped'));
+$('#card-next').addEventListener('click',()=>{if(ci<deck.length-1){ci++;renderCard()}});
+$('#card-prev').addEventListener('click',()=>{if(ci>0){ci--;renderCard()}});
+$('#card-shuffle').addEventListener('click',()=>buildDeck(true));
+cf.addEventListener('change',()=>{location.hash=hashFor(cf.value,'cards')});
+document.addEventListener('keydown',e=>{if($('#v-cards').hidden)return;if(e.target.tagName==='SELECT')return;
+  if(e.key==='ArrowRight')$('#card-next').click();else if(e.key==='ArrowLeft')$('#card-prev').click();
+  else if(e.key===' '&&e.target.id!=='fcard'){e.preventDefault();$('#fcard').classList.toggle('flipped')}});
+
+/* exam */
+const KEY='orgo1-final-answers';
+let answers={};try{answers=JSON.parse(store.get(KEY)||'{}')||{}}catch(e){answers={}}
+let mockSet=null;
+function newMock(){const ids=Q.map(q=>q.id);for(let i=ids.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]]}
+  mockSet=ids.slice(0,50).sort((a,b)=>a-b);mockSet.forEach(id=>delete answers[id]);store.set(KEY,JSON.stringify(answers))}
+function listFor(){const f=ef.value;if(f==='mock'){if(!mockSet)newMock();return mockSet.map(id=>Q[id])}return Q.filter(q=>f==='all'||q.ch===f)}
+function renderExam(){examFor=ef.value;const list=listFor();
+  $('#exam-reset').textContent=ef.value==='mock'?'New mock final':'Start over';
+  $('#q-list').innerHTML=list.map((q,n)=>`<article class="qcard" data-i="${q.id}"><div class="qhead"><span class="qnum">${n+1}.</span><span class="qsec">${CH[q.ch].short}</span></div><p class="qtext">${q.text}</p><div class="opts">${q.opts.map((o,k)=>`<button type="button" class="opt" data-k="${k}"><b>${'ABCD'[k]})</b><span>${o}</span></button>`).join('')}</div><div class="expl" hidden></div></article>`).join('');
+  list.forEach(q=>{if(answers[q.id]!==undefined)mark(q.id,answers[q.id])});updScore()}
+function mark(i,k){const card=document.querySelector(`.qcard[data-i="${i}"]`);if(!card)return;const q=Q[i];
+  card.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const kk=+b.dataset.k;if(kk===q.ans)b.classList.add('right');else if(kk===k)b.classList.add('wrong')});
+  const ex=card.querySelector('.expl');ex.hidden=false;
+  ex.innerHTML=`<strong>${k===q.ans?'Correct.':'Answer: '+'ABCD'[q.ans]+'.'}</strong> ${q.expl}`}
+function updScore(){const list=listFor();let done=0,right=0;
+  list.forEach(q=>{if(answers[q.id]!==undefined){done++;if(answers[q.id]===q.ans)right++}});
+  const pct=done?Math.round(right/done*100):0;
+  $('#exam-score').textContent=`${right} / ${done} correct${done?` (${pct}%)`:''}`;$('#exam-done').textContent=`${done} of ${list.length} answered`;
+  $('#exam-bar').style.width=(list.length?done/list.length*100:0)+'%'}
+$('#q-list').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b||b.disabled)return;
+  const i=+b.closest('.qcard').dataset.i;answers[i]=+b.dataset.k;mark(i,answers[i]);updScore();store.set(KEY,JSON.stringify(answers))});
+ef.addEventListener('change',()=>{location.hash=hashFor(ef.value,'exam')});
+$('#exam-reset').addEventListener('click',()=>{if(ef.value==='mock'){newMock()}else{listFor().forEach(q=>delete answers[q.id]);store.set(KEY,JSON.stringify(answers))}renderExam()});
+
+/* totals */
+$('#totals').textContent=`${CHAPTERS.length} chapter sections · ${CARDS.length} flashcards · ${Q.length} practice questions`;
+buildDeck(false);renderExam();route();
+
+</script>
+
+</body></html>
